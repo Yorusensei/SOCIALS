@@ -12,12 +12,13 @@
         --discord-dark: #313338;
         --discord-black: #1e1f22;
         --text-gray: #b5bac1;
+        --roblox-blue: #00A2FF; /* Added Roblox Color */
     }
 
     body { 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        /* Dark overlay on background for better readability */
-        background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('BACKGROUND.png');  
+        /* Ensure this filename matches your uploaded image exactly (BGM.jpg) */
+        background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('BGM.png');  
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -76,7 +77,6 @@
         line-height: 1.5;
     }
 
-    /* Button Styling */
     .social-buttons-container {
         display: flex;
         flex-direction: column;
@@ -100,27 +100,15 @@
         font-size: 16px;
     }
 
-    .btn-discord { 
-        background-color: var(--discord-blurple); 
-    }
+    .btn-discord { background-color: var(--discord-blurple); }
+    .btn-discord:hover { background-color: #4752c4; transform: translateY(-1px); }
 
-    .btn-discord:hover {
-        background-color: #4752c4;
-        transform: translateY(-1px);
-    }
+    .btn-access { background-color: #248046; }
+    .btn-access:hover { background-color: #1a6334; transform: translateY(-1px); }
 
-    .btn-discord:active {
-        transform: translateY(0);
-    }
-
-    /* Secondary button style for "Gain Access" */
-    .btn-access {
-        background-color: #248046; /* Discord success green */
-    }
-    
-    .btn-access:hover {
-        background-color: #1a6334;
-    }
+    /* Roblox Button Style */
+    .btn-roblox { background-color: var(--roblox-blue); }
+    .btn-roblox:hover { background-color: #0084d1; transform: translateY(-1px); }
 
     @media (max-width: 480px) {
         .form-container { padding: 20px; }
@@ -146,6 +134,10 @@
             
             <a href="https://discord.com/channels/1459499481081839783/1459499482478805170/1463156973737607281" target="_blank" class="btn-social btn-access">
                 <i class="bi bi-shield-check"></i> Gain Access
+            </a>
+
+            <a href="https://www.roblox.com/share?code=11fc3117c7641f4797f7c4dec5c9edee&type=Server" target="_blank" class="btn-social btn-roblox">
+                <i class="bi bi-controller"></i> Roblox Private Server
             </a>
         </div>
     </form>
