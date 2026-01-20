@@ -1,125 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APPROVAL!</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPROVAL!</title>
 
-<style>
-    :root {
-        --discord-blurple: #5865F2;
-        --discord-dark: #313338;
-        --discord-black: #1e1f22;
-        --text-gray: #b5bac1;
-        --roblox-blue: #00A2FF; /* Added Roblox Color */
-    }
+    <link rel="icon" type="image/png" href="logo.jpg">
 
-    body { 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        /* Ensure this filename matches your uploaded image exactly (BGM.jpg) */
-        background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('BGM.png');  
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        color: white;
-    }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    .form-container {
-        background: var(--discord-dark);
-        padding: 35px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        width: 100%;
-        max-width: 450px;
-        border: 1px solid rgba(255,255,255,0.05);
-    }
+    <style>
+        :root {
+            --discord-blurple: #5865F2;
+            --discord-dark: #313338;
+            --discord-black: #1e1f22;
+            --text-gray: #b5bac1;
+            --roblox-blue: #00A2FF;
+        }
 
-    h1 { 
-        font-size: 26px; 
-        text-align: center; 
-        color: #ffffff; 
-        margin-top: 0; 
-        font-weight: 700;
-    }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            /* Updated to .png for your background */
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('BGM.png');  
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
 
-    p { 
-        text-align: center; 
-        color: var(--text-gray); 
-        font-size: 15px; 
-        line-height: 1.4;
-    }
-    
-    .header-image {
-        display: block;
-        margin: 0 auto 20px auto;
-        width: 120px;
-        height: auto;
-        filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.4));
-    }
+        .form-container {
+            background: var(--discord-dark);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
 
-    label { 
-        display: block; 
-        margin-top: 25px; 
-        font-weight: 600; 
-        color: var(--text-gray); 
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        text-align: center;
-        line-height: 1.5;
-    }
+        h1 { 
+            font-size: 26px; 
+            text-align: center; 
+            color: #ffffff; 
+            margin-top: 0; 
+            font-weight: 700;
+        }
 
-    .social-buttons-container {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 20px;
-    }
+        p { 
+            text-align: center; 
+            color: var(--text-gray); 
+            font-size: 15px; 
+            line-height: 1.4;
+        }
+        
+        .header-image {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.4));
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
 
-    .btn-social {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px;
-        border-radius: 5px;
-        border: none;
-        color: white;
-        font-weight: 600;
-        text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.2s, transform 0.1s;
-        font-size: 16px;
-    }
+        .header-image:hover {
+            transform: scale(1.05);
+        }
 
-    .btn-discord { background-color: var(--discord-blurple); }
-    .btn-discord:hover { background-color: #4752c4; transform: translateY(-1px); }
+        label { 
+            display: block; 
+            margin-top: 25px; 
+            font-weight: 600; 
+            color: var(--text-gray); 
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            line-height: 1.5;
+        }
 
-    .btn-access { background-color: #248046; }
-    .btn-access:hover { background-color: #1a6334; transform: translateY(-1px); }
+        .social-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
 
-    /* Roblox Button Style */
-    .btn-roblox { background-color: var(--roblox-blue); }
-    .btn-roblox:hover { background-color: #0084d1; transform: translateY(-1px); }
+        .btn-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            font-size: 16px;
+        }
 
-    @media (max-width: 480px) {
-        .form-container { padding: 20px; }
-        h1 { font-size: 22px; }
-    }
-</style>
+        .btn-discord { background-color: var(--discord-blurple); }
+        .btn-discord:hover { background-color: #4752c4; transform: translateY(-1px); }
+
+        .btn-access { background-color: #248046; }
+        .btn-access:hover { background-color: #1a6334; transform: translateY(-1px); }
+
+        .btn-roblox { background-color: var(--roblox-blue); }
+        .btn-roblox:hover { background-color: #0084d1; transform: translateY(-1px); }
+
+        @media (max-width: 480px) {
+            .form-container { padding: 20px; }
+            h1 { font-size: 22px; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="form-container">
-    <img src="logo.jpg" alt="Ixora Logo" class="header-image">
+    <a href="#">
+        <img src="logo.jpg" alt="Ixora Logo" class="header-image">
+    </a>
 
     <h1>Welcome to Ixora Clan!</h1>
     <p>Please click the buttons below to gain access to our community.</p>
@@ -137,7 +147,7 @@
             </a>
 
             <a href="https://www.roblox.com/share?code=11fc3117c7641f4797f7c4dec5c9edee&type=Server" target="_blank" class="btn-social btn-roblox">
-                <i class="bi bi-controller"></i> Roblox Private Server
+                <i class="bi bi-controller"></i> Ixora Main Server
             </a>
         </div>
     </form>
