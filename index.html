@@ -7,9 +7,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
+    :root {
+        --discord-blurple: #5865F2;
+        --discord-dark: #313338;
+        --discord-black: #1e1f22;
+        --text-gray: #b5bac1;
+    }
+
     body { 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        background-image: url('BACKGROUND.png');  
+        /* Dark overlay on background for better readability */
+        background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('BACKGROUND.png');  
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -20,47 +28,60 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+        color: white;
     }
 
     .form-container {
-        background: rgba(255, 255, 255, 0.9);
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        background: var(--discord-dark);
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         width: 100%;
-        max-width: 500px;
+        max-width: 450px;
+        border: 1px solid rgba(255,255,255,0.05);
     }
 
-    h1 { font-size: 24px; text-align: center; color: #333; margin-top: 0; }
-    p { text-align: center; color: #666; font-size: 14px; }
+    h1 { 
+        font-size: 26px; 
+        text-align: center; 
+        color: #ffffff; 
+        margin-top: 0; 
+        font-weight: 700;
+    }
+
+    p { 
+        text-align: center; 
+        color: var(--text-gray); 
+        font-size: 15px; 
+        line-height: 1.4;
+    }
     
     .header-image {
         display: block;
         margin: 0 auto 20px auto;
-        width: 150px;
+        width: 120px;
         height: auto;
+        filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.4));
     }
 
-    label { display: block; margin-top: 15px; font-weight: bold; color: #444; }
-    
-    input { 
-        width: 100%; 
-        padding: 10px; 
-        margin-top: 5px; 
-        border: 1px solid #ccc; 
-        border-radius: 4px;
-        box-sizing: border-box; 
+    label { 
+        display: block; 
+        margin-top: 25px; 
+        font-weight: 600; 
+        color: var(--text-gray); 
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-align: center;
+        line-height: 1.5;
     }
-
-    .row { display: flex; gap: 10px; }
-    .row input { flex: 1; }
 
     /* Button Styling */
     .social-buttons-container {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin-top: 15px;
+        gap: 12px;
+        margin-top: 20px;
     }
 
     .btn-social {
@@ -68,27 +89,42 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
-        padding: 12px;
-        border-radius: 4px;
+        padding: 14px;
+        border-radius: 5px;
         border: none;
         color: white;
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
-        transition: transform 0.2s, opacity 0.2s;
+        transition: background-color 0.2s, transform 0.1s;
+        font-size: 16px;
     }
 
-    .btn-social:hover {
-        opacity: 0.9;
-        transform: translateY(-2px);
+    .btn-discord { 
+        background-color: var(--discord-blurple); 
     }
 
-    .btn-discord { background-color: #5865F2; }
-    .btn-messenger { background-color: #0084FF; }
+    .btn-discord:hover {
+        background-color: #4752c4;
+        transform: translateY(-1px);
+    }
+
+    .btn-discord:active {
+        transform: translateY(0);
+    }
+
+    /* Secondary button style for "Gain Access" */
+    .btn-access {
+        background-color: #248046; /* Discord success green */
+    }
+    
+    .btn-access:hover {
+        background-color: #1a6334;
+    }
 
     @media (max-width: 480px) {
-        .row { flex-direction: column; gap: 0; }
-        .form-container { padding: 15px; }
+        .form-container { padding: 20px; }
+        h1 { font-size: 22px; }
     }
 </style>
 </head>
@@ -98,21 +134,20 @@
     <img src="logo.jpg" alt="Ixora Logo" class="header-image">
 
     <h1>Welcome to Ixora Clan!</h1>
-    <p>Please click the buttons below to gain access to our community.
-    </p>
+    <p>Please click the buttons below to gain access to our community.</p>
 
     <form>
-        <label>Join to Discord Once VERIFIED
-                go back to this page click the gain access.</label>
+        <label>Join Discord. Once VERIFIED,<br>come back to this page and click Gain Access.</label>
+        
         <div class="social-buttons-container">
             <a href="https://discord.gg/sXccy2fyNZ" target="_blank" class="btn-social btn-discord">
                 <i class="bi bi-discord"></i> Join Discord 
             </a>
-            <a href="https://discord.com/channels/1459499481081839783/1459499482478805170/1463156973737607281" target="_blank" class="btn-social btn-discord">
-                <i class="bi bi-discord"></i> Gain Access
+            
+            <a href="https://discord.com/channels/1459499481081839783/1459499482478805170/1463156973737607281" target="_blank" class="btn-social btn-access">
+                <i class="bi bi-shield-check"></i> Gain Access
             </a>
         </div>
-         
     </form>
 </div>
 
