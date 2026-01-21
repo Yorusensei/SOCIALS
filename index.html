@@ -7,7 +7,35 @@
     <link rel="icon" type="image/png" href="logo.jpg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        :root{--discord-dark:#000;--text-gray:#b5bac1;--radius:25px}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-image:linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),url(BGM.png);background-size:cover;background-position:center;background-attachment:fixed;margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;color:#fff;overflow:hidden}.codes-grid::-webkit-scrollbar{width:8px}.codes-grid::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:10px}.codes-grid::-webkit-scrollbar-thumb{background:linear-gradient(#f00,#0f0,#00f,#ff0);border-radius:10px;box-shadow:0 0 10px rgba(255,255,255,.2)}.form-container{position:relative;background:var(--discord-dark);padding:50px 40px;border-radius:var(--radius);width:100%;max-width:480px;overflow:hidden;z-index:10;box-shadow:0 10px 50px rgba(0,0,0,.9);display:none;text-align:center}.form-container.active{display:block;animation:fadeIn .4s ease-out}#codePage.active{max-width:550px}@keyframes rotate{100%{transform:rotate(360deg)}}@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}.form-container::before{content:'';position:absolute;z-index:-2;left:-50%;top:-50%;width:200%;height:200%;background-image:conic-gradient(#f00,#0f0,#00f,#ff0,#f00);animation:rotate 15s linear infinite}.form-container::after{content:'';position:absolute;z-index:-1;left:4px;top:4px;width:calc(100% - 8px);height:calc(100% - 8px);background:var(--discord-dark);border-radius:calc(var(--radius) - 4px)}.header-image{display:block;margin:0 auto 25px auto;width:130px;border-radius:15px}h1{font-size:28px;font-weight:800;margin-top:0}p{color:var(--text-gray);font-size:16px;margin-bottom:35px}.social-buttons-container{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}.btn-social{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;padding:20px;background:0 0;color:#fff;font-weight:700;text-decoration:none;font-size:17px;border-radius:15px;z-index:1;overflow:hidden;transition:transform .3s ease;border:none;cursor:pointer;width:100%;box-sizing:border-box}.btn-social::before{content:'';position:absolute;z-index:-2;left:-50%;top:-50%;width:200%;height:200%;background-image:conic-gradient(from 0deg,#f00,#0f0,#00f,#f0f,#f00);animation:rotate 10s linear infinite}.btn-social::after{content:'';position:absolute;z-index:-1;left:2.5px;top:2.5px;width:calc(100% - 5px);height:calc(100% - 5px);background:#000;border-radius:13px}.btn-social:hover{transform:scale(1.04)}.codes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:380px;overflow-y:auto;width:100%;padding-right:10px}.btn-copy{font-size:12px;padding:15px;text-transform:uppercase}.mute-toggle{position:absolute;top:20px;right:20px;width:50px;height:50px;background:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;border:none;color:#fff;font-size:20px}#fireCanvas{position:fixed;bottom:0;left:0;width:100%;height:350px;z-index:1;pointer-events:none}
+        :root{--discord-dark:#000;--text-gray:#b5bac1;--radius:25px;--neon-green:#00ff88;--neon-red:#ff4444}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background-image:linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),url(BGM.png);background-size:cover;background-position:center;background-attachment:fixed;margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;color:#fff;overflow:hidden}
+        .codes-grid::-webkit-scrollbar{width:8px}.codes-grid::-webkit-scrollbar-track{background:rgba(0,0,0,.3);border-radius:10px}.codes-grid::-webkit-scrollbar-thumb{background:linear-gradient(#f00,#0f0,#00f,#ff0);border-radius:10px;box-shadow:0 0 10px rgba(255,255,255,.2)}
+        .form-container{position:relative;background:var(--discord-dark);padding:50px 40px;border-radius:var(--radius);width:100%;max-width:480px;overflow:hidden;z-index:10;box-shadow:0 10px 50px rgba(0,0,0,.9);display:none;text-align:center}
+        .form-container.active{display:block;animation:fadeIn .4s ease-out}
+        #codePage.active{max-width:550px}
+        @keyframes rotate{100%{transform:rotate(360deg)}}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+        .form-container::before{content:'';position:absolute;z-index:-2;left:-50%;top:-50%;width:200%;height:200%;background-image:conic-gradient(#f00,#0f0,#00f,#ff0,#f00);animation:rotate 15s linear infinite}
+        .form-container::after{content:'';position:absolute;z-index:-1;left:4px;top:4px;width:calc(100% - 8px);height:calc(100% - 8px);background:var(--discord-dark);border-radius:calc(var(--radius) - 4px)}
+        .header-image{display:block;margin:0 auto 25px auto;width:130px;border-radius:15px}
+        h1{font-size:28px;font-weight:800;margin-top:0}
+        p{color:var(--text-gray);font-size:16px;margin-bottom:35px}
+        .social-buttons-container{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
+        .btn-social{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;padding:20px;background:0 0;color:#fff;font-weight:700;text-decoration:none;font-size:17px;border-radius:15px;z-index:1;overflow:hidden;transition:transform .3s ease;border:none;cursor:pointer;width:100%;box-sizing:border-box}
+        .btn-social::before{content:'';position:absolute;z-index:-2;left:-50%;top:-50%;width:200%;height:200%;background-image:conic-gradient(from 0deg,#f00,#0f0,#00f,#f0f,#f00);animation:rotate 10s linear infinite}
+        .btn-social::after{content:'';position:absolute;z-index:-1;left:2.5px;top:2.5px;width:calc(100% - 5px);height:calc(100% - 5px);background:#000;border-radius:13px}
+        .btn-social:hover{transform:scale(1.04)}
+        
+        /* Status Dot Styles */
+        .status-dot{font-size:10px;color:var(--neon-green);margin-left:auto;border:1px solid var(--neon-green);padding:2px 8px;border-radius:10px;text-transform:uppercase;font-weight:bold;letter-spacing:1px}
+        .status-due{color:var(--neon-red) !important;border-color:var(--neon-red) !important}
+        .btn-due{animation:shake 0.5s ease-in-out infinite}
+
+        .codes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:380px;overflow-y:auto;width:100%;padding-right:10px}
+        .btn-copy{font-size:12px;padding:15px;text-transform:uppercase}
+        .mute-toggle{position:absolute;top:20px;right:20px;width:50px;height:50px;background:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;border:none;color:#fff;font-size:20px}
+        #fireCanvas{position:fixed;bottom:0;left:0;width:100%;height:350px;z-index:1;pointer-events:none}
     </style>
 </head>
 <body>
@@ -20,9 +48,9 @@
     <p>Complete the steps below to join us.</p>
     <div class="social-buttons-container">
         <button onclick="_0x_nav('aHR0cHM6Ly9kaXNjb3JkLmdnL3NYY2N5MmZ5Tlo=')" class="btn-social"><i class="bi bi-discord"></i> Join Discord</button>
-       <button onclick="_0x_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social">
-    <i class="bi bi-shield-check"></i> Gain Access
-</button>
+        <button onclick="_0x_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social">
+            <i class="bi bi-shield-check"></i> Gain Access
+        </button>
         <button onclick="_0x5a1b('serverPage')" class="btn-social"><i class="bi bi-controller"></i> Ixora Private Servers</button>
         <button onclick="_0x5a1b('codePage')" class="btn-social"><i class="bi bi-code-slash"></i> Redeem Codes</button>
     </div>
@@ -31,8 +59,15 @@
 <div class="form-container" id="serverPage">
     <h1>Private Servers</h1>
     <div class="social-buttons-container">
-        <button onclick="_0x_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTExZmMzMTE3Yzc2NDFmNDc5N2Y3YzRkZWM1YzllZGVlJnR5cGU9U2VydmVy')" class="btn-social"><i class="bi bi-controller"></i> Ixora Server 1</button>
-        <button onclick="_0x_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPWQ1ZTVhYTU5NWZmMmIwNGVhZTM4YWRjZGFmNWYxNTYwJnR5cGU9U2VydmVy')" class="btn-social"><i class="bi bi-controller"></i> Ixora Server 2</button>
+        <button onclick="_0x_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTExZmMzMTE3Yzc2NDFmNDc5N2Y3YzRkZWM1YzllZGVlJnR5cGU9U2VydmVy')" class="btn-social">
+            <i class="bi bi-controller"></i> Ixora Server 1 <span class="status-dot">Online</span>
+        </button>
+        <button onclick="_0x_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPWQ1ZTVhYTU5NWZmMmIwNGVhZTM4YWRjZGFmNWYxNTYwJnR5cGU9U2VydmVy')" class="btn-social">
+            <i class="bi bi-controller"></i> Ixora Server 2 <span class="status-dot">Online</span>
+        </button>
+        <button onclick="_0x_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTIwNzkxOTk2MWMxM2ExNDFmOGRkNjY2YjI0MWI1OTEmdHlwZT1TZXJ2ZXI=')" class="btn-social btn-due">
+            <i class="bi bi-controller"></i> Ixora Server 3 <span class="status-dot status-due">Monthly Due</span>
+        </button>
         <button onclick="_0x5a1b('mainPage')" class="btn-social">Go Back</button>
     </div>
 </div>
@@ -44,9 +79,7 @@
 </div>
 
 <canvas id="fireCanvas"></canvas>
-<audio id="bgMusic" loop preload="auto">
-    <source src="IXORA EY.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" loop preload="auto"><source src="IXORA EY.mp3" type="audio/mpeg"></audio>
 
 <script>
     (function(){
@@ -54,30 +87,24 @@
         const _0xI = document.getElementById('muteIcon');
         _0xM.volume = 0.4;
 
-        // Ensure Audio plays on first interaction
         const _0xPlay = () => {
-            _0xM.play().then(() => {
-                _0xI.className = 'bi bi-volume-up-fill';
-            }).catch(e => console.log("Autoplay blocked, waiting for user click."));
+            _0xM.play().then(() => { _0xI.className = 'bi bi-volume-up-fill'; }).catch(e => {});
         };
 
         document.addEventListener('click', _0xPlay, { once: true });
 
-        
         window._0x5a1b = function(p){
             document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
             document.getElementById(p).classList.add('active');
         };
         window._0x_nav = function(l){ window.open(atob(l), '_blank'); };
 
-        
         document.getElementById('muteBtn').onclick = (e) => {
             e.stopPropagation();
             if (_0xM.paused) { _0xM.play(); _0xI.className = 'bi bi-volume-up-fill'; }
             else { _0xM.pause(); _0xI.className = 'bi bi-volume-mute-fill'; }
         };
 
-        
         const _0xC = ["150KLIKES","KURAMANEXTWEEK","25MVisits","125KLIKES","50KFAVORITES","BUGSPATCH1","BUGSPATCH2","BUGSPATCH3","BUGSPATCH4","UPDATETHISWEEKEND","100KLIKES","NEWCHIKARACODE","75KLIKES","ALMOST100KKLIKES","MOREYEN","MORECHIKARA","HappyNewYear","50kLikes","10MVisits","NewBloodlines","15kLikes","25kLikes","30kLikes","MinorBugs","BadActors","JanuaryIncident","Krampus","SecretCode","ChristmasTime","10kLikes","1MVisits","ChristmasDelay","Gullible67","FreeChikara3","FreeChikara2","FreeChikara","YenCode"];
         const _0xG = document.getElementById('codesGrid');
         _0xC.forEach(c => {
@@ -92,7 +119,6 @@
             _0xG.appendChild(b);
         });
 
-        
         const _0xV=document.getElementById('fireCanvas'),_0xX=_0xV.getContext('2d');let _0xP=[];
         function _0xR(){_0xV.width=window.innerWidth;_0xV.height=350;}window.onresize=_0xR;_0xR();
         class _0xF{constructor(){this.x=Math.random()*_0xV.width;this.y=_0xV.height+50;this.sY=Math.random()*2.5+1.5;this.sX=(Math.random()-0.5)*2;this.sz=Math.random()*25+15;this.l=1;this.d=Math.random()*0.015+0.005;}u(){this.y-=this.sY;this.x+=this.sX;this.l-=this.d;if(this.sz>0.5)this.sz-=0.15;}dr(){_0xX.globalCompositeOperation="lighter";_0xX.fillStyle=`rgba(255,${Math.floor(Math.random()*100+50)},0,${this.l})`;_0xX.beginPath();_0xX.arc(this.x,this.y,this.sz,0,Math.PI*2);_0xX.fill();}}
@@ -101,5 +127,3 @@
 </script>
 </body>
 </html>
-
-<!--Oh ano anong ginagawa mo dito boi?. Mag trabaho ka!-->
