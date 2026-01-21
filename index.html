@@ -3,155 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APPROVAL!</title>
-
+    <title>Ixora Clan | Access</title>
     <link rel="icon" type="image/png" href="logo.jpg">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-        :root {
-            --discord-blurple: #5865F2;
-            --discord-dark: #313338;
-            --discord-black: #1e1f22;
-            --text-gray: #b5bac1;
-            --roblox-blue: #00A2FF;
+        :root { 
+            --discord-dark: #000000; 
+            --text-gray: #b5bac1; 
+            --radius: 25px; 
         }
 
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            /* Updated to .png for your background */
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('BGM.png');  
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: white;
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('BGM.png');  
+            background-size: cover; background-position: center; background-attachment: fixed;
+            margin: 0; display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; color: white; overflow: hidden;
         }
 
+        /* --- RGB SCROLLBAR --- */
+        .codes-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+        .codes-grid::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        .codes-grid::-webkit-scrollbar-thumb {
+            background: linear-gradient(#ff0000, #00ff00, #0000ff, #ffff00);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- CONTAINER STYLE --- */
         .form-container {
-            background: var(--discord-dark);
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        h1 { 
-            font-size: 26px; 
-            text-align: center; 
-            color: #ffffff; 
-            margin-top: 0; 
-            font-weight: 700;
-        }
-
-        p { 
-            text-align: center; 
-            color: var(--text-gray); 
-            font-size: 15px; 
-            line-height: 1.4;
+            position: relative; 
+            background: var(--discord-dark); 
+            padding: 50px 40px; 
+            border-radius: var(--radius); 
+            width: 100%; 
+            max-width: 480px; 
+            overflow: hidden; 
+            z-index: 10; 
+            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
+            display: none; 
+            text-align: center;
         }
         
-        .header-image {
-            display: block;
-            margin: 0 auto 20px auto;
-            width: 120px;
-            height: auto;
-            filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.4));
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
+        .form-container.active { display: block; animation: fadeIn 0.4s ease-out; }
+        #codePage.active { max-width: 550px; }
 
-        .header-image:hover {
-            transform: scale(1.05);
-        }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        label { 
-            display: block; 
-            margin-top: 25px; 
-            font-weight: 600; 
-            color: var(--text-gray); 
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-align: center;
-            line-height: 1.5;
-        }
+        /* RGB Border */
+        .form-container::before { content: ''; position: absolute; z-index: -2; left: -50%; top: -50%; width: 200%; height: 200%; background-image: conic-gradient(#ff0000, #00ff00, #0000ff, #ffff00, #ff0000); animation: rotate 15s linear infinite; }
+        .form-container::after { content: ''; position: absolute; z-index: -1; left: 4px; top: 4px; width: calc(100% - 8px); height: calc(100% - 8px); background: var(--discord-dark); border-radius: calc(var(--radius) - 4px); }
 
-        .social-buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
+        .header-image { display: block; margin: 0 auto 25px auto; width: 130px; border-radius: 15px; }
+        h1 { font-size: 28px; font-weight: 800; margin-top: 0; }
+        p { color: var(--text-gray); font-size: 16px; margin-bottom: 35px; }
 
+        /* --- BUTTONS (PREVIOUS STYLE RESTORED) --- */
+        .social-buttons-container { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+        
         .btn-social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px;
-            border-radius: 5px;
-            border: none;
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            font-size: 16px;
+            position: relative; display: flex; align-items: center; justify-content: center; 
+            gap: 12px; padding: 20px; background: transparent; color: white; font-weight: 700; 
+            text-decoration: none; font-size: 17px; border-radius: 15px; z-index: 1; 
+            overflow: hidden; transition: transform 0.3s ease; border: none; cursor: pointer; 
+            width: 100%; box-sizing: border-box;
         }
+        .btn-social::before { content: ''; position: absolute; z-index: -2; left: -50%; top: -50%; width: 200%; height: 200%; background-image: conic-gradient(from 0deg, #ff0000, #00ff00, #0000ff, #ff00ff, #ff0000); animation: rotate 10s linear infinite; }
+        .btn-social::after { content: ''; position: absolute; z-index: -1; left: 2.5px; top: 2.5px; width: calc(100% - 5px); height: calc(100% - 5px); background: #000; border-radius: 13px; }
+        .btn-social:hover { transform: scale(1.04); }
 
-        .btn-discord { background-color: var(--discord-blurple); }
-        .btn-discord:hover { background-color: #4752c4; transform: translateY(-1px); }
+        /* --- CODES GRID --- */
+        .codes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-height: 380px; overflow-y: auto; width: 100%; padding-right: 10px; }
+        .btn-copy { font-size: 12px; padding: 15px; text-transform: uppercase; }
 
-        .btn-access { background-color: #248046; }
-        .btn-access:hover { background-color: #1a6334; transform: translateY(-1px); }
+        .mute-toggle { position: absolute; top: 20px; right: 20px; width: 50px; height: 50px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; border: none; color: white; font-size: 20px; }
 
-        .btn-roblox { background-color: var(--roblox-blue); }
-        .btn-roblox:hover { background-color: #0084d1; transform: translateY(-1px); }
-
-        @media (max-width: 480px) {
-            .form-container { padding: 20px; }
-            h1 { font-size: 22px; }
-        }
+        /* FIRE CANVAS */
+        #fireCanvas { position: fixed; bottom: 0; left: 0; width: 100%; height: 350px; z-index: 1; pointer-events: none; }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <a href="#">
-        <img src="logo.jpg" alt="Ixora Logo" class="header-image">
-    </a>
+<button class="mute-toggle" id="muteBtn"><i class="bi bi-volume-mute-fill" id="muteIcon"></i></button>
 
+<div class="form-container active" id="mainPage">
+    <img src="logo.jpg" class="header-image">
     <h1>Welcome to Ixora Clan!</h1>
-    <p>Please click the buttons below to gain access to our community.</p>
-
-    <form>
-        <label>Join Discord. Once VERIFIED,<br>come back to this page and click Gain Access.</label>
-        
-        <div class="social-buttons-container">
-            <a href="https://discord.gg/sXccy2fyNZ" target="_blank" class="btn-social btn-discord">
-                <i class="bi bi-discord"></i> Join Discord 
-            </a>
-            
-            <a href="https://discord.com/channels/1459499481081839783/1459499482478805170/1463156973737607281" target="_blank" class="btn-social btn-access">
-                <i class="bi bi-shield-check"></i> Gain Access
-            </a>
-
-            <a href="https://www.roblox.com/share?code=11fc3117c7641f4797f7c4dec5c9edee&type=Server" target="_blank" class="btn-social btn-roblox">
-                <i class="bi bi-controller"></i> Ixora Main Server
-            </a>
-        </div>
-    </form>
+    <p>Complete the steps below to join us.</p>
+    <div class="social-buttons-container">
+        <a href="https://discord.gg/sXccy2fyNZ" target="_blank" class="btn-social"><i class="bi bi-discord"></i> Join Discord</a>
+        <a href="https://discord.com/channels/1459499481081839783/..." target="_blank" class="btn-social"><i class="bi bi-shield-check"></i> Gain Access</a>
+        <button onclick="showPage('serverPage')" class="btn-social"><i class="bi bi-controller"></i> Ixora Private Servers</button>
+        <button onclick="showPage('codePage')" class="btn-social"><i class="bi bi-code-slash"></i> Redeem Codes</button>
+    </div>
 </div>
+
+<div class="form-container" id="serverPage">
+    <h1>Private Servers</h1>
+    <div class="social-buttons-container">
+        <a href="https://www.roblox.com/share?code=11fc3117c7641f4797f7c4dec5c9edee&type=Server" target="_blank" class="btn-social"><i class="bi bi-controller"></i> Ixora Server #1</a>
+            <a href="https://www.roblox.com/share?code=d5e5aa595ff2b04eae38adcdaf5f1560&type=Server" target="_blank" class="btn-social"><i class="bi bi-controller"></i> Ixora Server #2</a>
+            <a href="https://www.roblox.com/share?code=207919961c13a1418f8dd66a2b41b591&type=Server" target="_blank" class="btn-social"><i class="bi bi-controller"></i> Ixora Server #3</a>
+        <button onclick="showPage('mainPage')" class="btn-social">Go Back</button>
+    </div>
+</div>
+
+<div class="form-container" id="codePage">
+    <h1>Active Codes</h1>
+    <div class="codes-grid" id="codesGrid"></div>
+    <button onclick="showPage('mainPage')" class="btn-social" style="margin-top:20px;">Go Back</button>
+</div>
+
+<canvas id="fireCanvas"></canvas>
+<audio id="bgMusic" loop preload="auto"><source src="IXORA EY.mp3" type="audio/mpeg"></audio>
+
+<script>
+    const music = document.getElementById('bgMusic');
+    const muteIcon = document.getElementById('muteIcon');
+    music.volume = 0.4;
+
+    function showPage(pageId) {
+        document.querySelectorAll('.form-container').forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    document.getElementById('muteBtn').onclick = () => {
+        if (music.paused) { music.play(); muteIcon.className = 'bi bi-volume-up-fill'; }
+        else { music.pause(); muteIcon.className = 'bi bi-volume-mute-fill'; }
+    };
+
+    document.addEventListener('click', () => { if(music.paused) music.play().then(()=>muteIcon.className='bi bi-volume-up-fill'); }, {once: true});
+
+    const codes = ["150KLIKES", "KURAMANEXTWEEK", "25MVisits", "125KLIKES", "50KFAVORITES", "BUGSPATCH1", "BUGSPATCH2", "BUGSPATCH3", "BUGSPATCH4", "UPDATETHISWEEKEND", "100KLIKES", "NEWCHIKARACODE", "75KLIKES", "ALMOST100KKLIKES", "MOREYEN", "MORECHIKARA", "HappyNewYear", "50kLikes", "10MVisits", "NewBloodlines", "15kLikes", "25kLikes", "30kLikes", "MinorBugs", "BadActors", "JanuaryIncident", "Krampus", "SecretCode", "ChristmasTime", "10kLikes", "1MVisits", "ChristmasDelay", "Gullible67", "FreeChikara3", "FreeChikara2", "FreeChikara", "YenCode"];
+    const grid = document.getElementById('codesGrid');
+    codes.forEach(c => {
+        const b = document.createElement('button');
+        b.className = 'btn-social btn-copy';
+        b.innerHTML = `<span>${c}</span> <i class="bi bi-copy"></i>`;
+        b.onclick = () => { navigator.clipboard.writeText(c); b.innerHTML = "COPIED!"; setTimeout(()=>b.innerHTML=`<span>${c}</span> <i class="bi bi-copy"></i>`, 1000); };
+        grid.appendChild(b);
+    });
+
+    // Fire Engine
+    const canvas = document.getElementById('fireCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = 350; }
+    window.onresize = resize; resize();
+
+    class Flame {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 50;
+            this.speedY = Math.random() * 2.5 + 1.5;
+            this.speedX = (Math.random() - 0.5) * 2;
+            this.size = Math.random() * 25 + 15;
+            this.life = 1;
+            this.decay = Math.random() * 0.015 + 0.005;
+        }
+        update() { this.y -= this.speedY; this.x += this.speedX; this.life -= this.decay; if (this.size > 0.5) this.size -= 0.15; }
+        draw() {
+            ctx.globalCompositeOperation = "lighter";
+            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100 + 50)}, 0, ${this.life})`;
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (particles.length < 350) for(let i=0; i<8; i++) particles.push(new Flame());
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update(); particles[i].draw();
+            if (particles[i].life <= 0) { particles.splice(i, 1); i--; }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
 
 </body>
 </html>
