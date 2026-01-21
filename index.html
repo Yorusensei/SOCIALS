@@ -20,7 +20,9 @@
     <p>Complete the steps below to join us.</p>
     <div class="social-buttons-container">
         <button onclick="_0x_nav('aHR0cHM6Ly9kaXNjb3JkLmdnL3NYY2N5MmZ5Tlo=')" class="btn-social"><i class="bi bi-discord"></i> Join Discord</button>
-        <button onclick="_0x_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social"><i class="bi bi-shield-check"></i> Gain Access</button>
+       <button onclick="_0x_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social">
+    <i class="bi bi-shield-check"></i> Gain Access
+</button>
         <button onclick="_0x5a1b('serverPage')" class="btn-social"><i class="bi bi-controller"></i> Ixora Private Servers</button>
         <button onclick="_0x5a1b('codePage')" class="btn-social"><i class="bi bi-code-slash"></i> Redeem Codes</button>
     </div>
@@ -61,21 +63,21 @@
 
         document.addEventListener('click', _0xPlay, { once: true });
 
-        // Nav and Decrypt
+        
         window._0x5a1b = function(p){
             document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
             document.getElementById(p).classList.add('active');
         };
         window._0x_nav = function(l){ window.open(atob(l), '_blank'); };
 
-        // Mute logic
+        
         document.getElementById('muteBtn').onclick = (e) => {
             e.stopPropagation();
             if (_0xM.paused) { _0xM.play(); _0xI.className = 'bi bi-volume-up-fill'; }
             else { _0xM.pause(); _0xI.className = 'bi bi-volume-mute-fill'; }
         };
 
-        // Codes
+        
         const _0xC = ["150KLIKES","KURAMANEXTWEEK","25MVisits","125KLIKES","50KFAVORITES","BUGSPATCH1","BUGSPATCH2","BUGSPATCH3","BUGSPATCH4","UPDATETHISWEEKEND","100KLIKES","NEWCHIKARACODE","75KLIKES","ALMOST100KKLIKES","MOREYEN","MORECHIKARA","HappyNewYear","50kLikes","10MVisits","NewBloodlines","15kLikes","25kLikes","30kLikes","MinorBugs","BadActors","JanuaryIncident","Krampus","SecretCode","ChristmasTime","10kLikes","1MVisits","ChristmasDelay","Gullible67","FreeChikara3","FreeChikara2","FreeChikara","YenCode"];
         const _0xG = document.getElementById('codesGrid');
         _0xC.forEach(c => {
@@ -90,7 +92,7 @@
             _0xG.appendChild(b);
         });
 
-        // Fire FX
+        
         const _0xV=document.getElementById('fireCanvas'),_0xX=_0xV.getContext('2d');let _0xP=[];
         function _0xR(){_0xV.width=window.innerWidth;_0xV.height=350;}window.onresize=_0xR;_0xR();
         class _0xF{constructor(){this.x=Math.random()*_0xV.width;this.y=_0xV.height+50;this.sY=Math.random()*2.5+1.5;this.sX=(Math.random()-0.5)*2;this.sz=Math.random()*25+15;this.l=1;this.d=Math.random()*0.015+0.005;}u(){this.y-=this.sY;this.x+=this.sX;this.l-=this.d;if(this.sz>0.5)this.sz-=0.15;}dr(){_0xX.globalCompositeOperation="lighter";_0xX.fillStyle=`rgba(255,${Math.floor(Math.random()*100+50)},0,${this.l})`;_0xX.beginPath();_0xX.arc(this.x,this.y,this.sz,0,Math.PI*2);_0xX.fill();}}
@@ -99,3 +101,5 @@
 </script>
 </body>
 </html>
+
+<!--Oh ano anong ginagawa mo dito boi?. Mag trabaho ka!-->
