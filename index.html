@@ -107,6 +107,47 @@
             }
         }
 
+        /* Container to center the text behind the UI */
+.bg-text-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0; /* Behind the form-container which is z-index 10 */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* The IXORA text with glowing and throbbing effects */
+.bg-glow-text {
+    font-size: 15vw; /* Large responsive size */
+    font-weight: 900;
+    color: rgba(0, 255, 136, 0.05); /* Very faint base color */
+    letter-spacing: 20px;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    margin: 0;
+    user-select: none;
+    /* Syncs with your existing 2s infinite pulse */
+    animation: throbGlow 2s infinite alternate ease-in-out;
+}
+
+/* Throbbing animation that mimics a beat */
+@keyframes throbGlow {
+    0% {
+        transform: scale(1);
+        color: rgba(0, 255, 136, 0.05);
+        text-shadow: 0 0 20px rgba(255, 25, 0, 0.2);
+        filter: blur(2px);
+    }
+    100% {
+        transform: scale(1.1); /* Throbbing effect */
+        color: rgba(0, 255, 136, 0.15); /* Brightens on the beat */
+        text-shadow: 0 0 50px rgba(0, 47, 255, 0.6), 0 0 100px rgba(0, 255, 136, 0.2);
+        filter: blur(0px);
+    }
+}
+
         .btn-social { 
             position: relative; 
             display: flex; 
@@ -186,6 +227,10 @@
                 <span><i class="bi bi-patch-check-fill"></i> Certified Trusted Seller</span>
             </button>
         </div>
+    </div>
+
+    <div class="bg-text-container">
+    <h1 class="bg-glow-text">IXORA</h1>
     </div>
 
     <div class="form-container" id="trustedSeller">
