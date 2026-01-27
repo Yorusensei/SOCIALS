@@ -11,12 +11,14 @@
         
         /* MINECRAFT FONT IMPORT */
         @font-face {
-            font-family: 'Minecraft';
-            src: url('minecraft.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+        font-family: 'Minecraft';
+        src: url('https://cdn.jsdelivr.net/gh/microsoft/minecraft-font@1.0.0/font/minecraft.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/microsoft/minecraft-font@1.0.0/font/minecraft.woff') format('woff'),
+         url('minecraft.ttf') format('truetype');
+         font-display: swap;
+        font-weight: normal;
+        font-style: normal;
+}
 
         body { 
             font-family: 'Minecraft', sans-serif; 
