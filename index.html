@@ -1307,6 +1307,19 @@
             let trapActivated = false;
             let trapEnabled = true;
 
+            setInterval(() => {
+    if (typeof eruda !== 'undefined' || 
+        document.querySelector('[id*="eruda"], script[src*="eruda"]')) {
+        document.body.innerHTML = '<h1>Debugging Not Allowed</h1>';
+        window.location.reload();
+    }
+}, 500);
+
+// Detect dev tools via debugger statement
+setInterval(() => {
+    debugger;
+}, 1000);
+
             // ================= MOBILE-ONLY ERUDA LOADING =================
             // Load Eruda only on mobile devices, not on PC
             (function() {
